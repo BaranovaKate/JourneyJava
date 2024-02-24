@@ -47,7 +47,6 @@ public class JourneyService {
             query.setParameter("id", id);
             return query.uniqueResultOptional();
         });
-
         if (optionalJourney.isPresent()) {
             final Journey journey = optionalJourney.get();
             return journeyMapper.toDto(journey);
