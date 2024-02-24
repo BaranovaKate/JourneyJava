@@ -18,7 +18,7 @@ public class JourneyService {
 
     private final SessionFactory sessionFactory;
     private final JourneyMapper journeyMapper;
-    private static final String update = """
+    private static final String CONST_UPDATE = """
                     UPDATE Journey S SET\s
                        S.country = :country,\s
                        S.town = :town,\s
@@ -75,7 +75,7 @@ public class JourneyService {
 
     public void update(Long id, JourneyDto journey) {
         sessionFactory.inTransaction(session -> {
-            final MutationQuery query = session.createMutationQuery(update);
+            final MutationQuery query = session.createMutationQuery(CONST_UPDATE);
 
             query.setParameter("id", id);
             query.setParameter("country", journey.getCountry());
