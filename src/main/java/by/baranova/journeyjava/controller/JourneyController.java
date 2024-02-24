@@ -99,7 +99,6 @@ public class JourneyController {
 
     @DeleteMapping("/{id}")
     public String handleJourneyDelete(@PathVariable Long id) {
-
         journeyService.deleteById(id);
         return CONST_REDIRECT;
     }
