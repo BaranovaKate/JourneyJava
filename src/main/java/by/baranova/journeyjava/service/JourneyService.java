@@ -18,7 +18,13 @@ public class JourneyService {
 
     private final SessionFactory sessionFactory;
     private final JourneyMapper journeyMapper;
-
+    private static final String update = """
+                    UPDATE Journey S SET\s
+                       S.country = :country,\s
+                       S.town = :town,\s
+                       S.dateToJourney = :dateToJourney,\s
+                       S.dateFromJourney = :dateFromJourney
+                    WHERE S.id = :id""";
     public JourneyService(SessionFactory sessionFactory, JourneyMapper journeyMapper) {
         this.sessionFactory = sessionFactory;
         this.journeyMapper = journeyMapper;
@@ -70,13 +76,7 @@ public class JourneyService {
 
     public void update(Long id, JourneyDto journey) {
         sessionFactory.inTransaction(session -> {
-            final MutationQuery query = session.createMutationQuery("""
-                    UPDATE Journey S SET\s
-                       S.country = :country,\s
-                       S.town = :town,\s
-                       S.dateToJourney = :dateToJourney,\s
-                       S.dateFromJourney = :dateFromJourney
-                    WHERE S.id = :id""");
+            final MutationQuery query = session.createMutationQuery(update);
 
             query.setParameter("id", id);
             query.setParameter("country", journey.getCountry());

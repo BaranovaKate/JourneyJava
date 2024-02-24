@@ -12,8 +12,6 @@
     <div class="card-body">
         <h5 class="card-title" th:text="${journey.country}"> Country</h5>
         <p class="card-text" th:text="${journey.town}">Town</p>
-<!--        <p class="card-text" th:text="${journey.dateToJourney}">dateToJourney</p>-->
-<!--        <p class="card-text" th:text="${journey.dateFromJourney}">dateFromJourney</p>-->
         <a th:href="@{/journeys/{id}(id=${journey.id})}">Подробнее</a>
         <a th:href="@{/journeys/update/{id}(id=${journey.id})}">Изменить</a>
         <a th:href="@{/journeys/delete/{id}(id=${journey.id})}">Удалить</a>
