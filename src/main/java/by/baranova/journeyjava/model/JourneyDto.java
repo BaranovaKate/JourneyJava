@@ -20,10 +20,10 @@ public class JourneyDto implements Serializable {
     private String town;
 
 
-    @NotNull(message = "Необходимо указать дату рождения")
+    @NotNull(message = "Необходимо указать дату выезда")
     private LocalDate dateToJourney;
 
-    @NotNull(message = "Необходимо указать дату рождения")
+    @NotNull(message = "Необходимо указать дату возвращения")
     private LocalDate dateFromJourney;
 
     public JourneyDto() {

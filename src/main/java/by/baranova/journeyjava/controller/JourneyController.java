@@ -14,48 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-//
-//@RestController
-//@RequestMapping("/journeys")
-//public class JourneyController {
-//
-//    private final JourneyService journeyService;
-//
-//    public JourneyController(JourneyService journeyService) {
-//        this.journeyService = journeyService;
-//    }
-//
-//    @GetMapping
-//    public List<JourneyDto> findJourneys() {
-//        return journeyService.findJourneys();
-//    }
-//
-//    @GetMapping("/{id}")
-//    public JourneyDto findJourney(@PathVariable("id") Long id) {
-//        return journeyService.findJourneyById(id);
-//    }
-//
-//    @PostMapping("/new")
-//    public void handleJourneyCreation(
-//            @Valid @RequestBody JourneyDto journey) {
-//        journeyService.save(journey);
-//    }
-//
-//    @PutMapping("/{id}")
-//    public void handleJourneyUpdate(
-//            @PathVariable Long id,
-//            @Valid @RequestBody JourneyDto journey) {
-//        journeyService.update(id, journey);
-//    }
-//
-//    @DeleteMapping("/{id}")
-//    public void handleJourneyDelete(@PathVariable Long id) {
-//        journeyService.deleteById(id);
-//    }
-//}
-//
-
-
 @Controller
 @RequestMapping("/journeys")
 public class JourneyController {
@@ -142,10 +100,7 @@ public class JourneyController {
 
         journeyService.deleteById(id);
         return "redirect:/journeys";
-
-
     }
-
 }
 
 

@@ -17,7 +17,6 @@ public class JourneyMapper {
 
         return dto;
     }
-
     public Journey toEntity(JourneyDto dto) {
         final Journey entity = new Journey();
         entity.setId(dto.getId());

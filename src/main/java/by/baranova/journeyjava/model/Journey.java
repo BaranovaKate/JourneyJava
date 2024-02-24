@@ -1,8 +1,5 @@
 package by.baranova.journeyjava.model;
-
-
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
 
 @Entity
@@ -69,7 +66,6 @@ public class Journey {
     public void setDateFromJourney(LocalDate dateFromJourney) {
         this.dateFromJourney = dateFromJourney;
     }
-
 
     public Journey(Long id, String country, String town, LocalDate dateToJourney, LocalDate dateFromJourney) {
         this.id = id;
