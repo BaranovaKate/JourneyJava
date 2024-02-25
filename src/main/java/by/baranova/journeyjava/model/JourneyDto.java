@@ -16,7 +16,7 @@ public class JourneyDto implements Serializable {
     private String country;
 
     @NotBlank(message = "Поле с названием города не должно быть пустым")
-    @Size(min = 2, max = 20, message = "Фамилия дожна быть от 2 до 16 символов")
+    @Size(min = 2, max = 20, message = "Поле с названием города дожно содержать от 2 до 20 символов")
     private String town;
 
 

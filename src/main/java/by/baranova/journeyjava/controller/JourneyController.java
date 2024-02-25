@@ -29,7 +29,6 @@ public class JourneyController {
     @GetMapping
     public String findJourneys(Model model) {
         final List<JourneyDto> journeys = journeyService.findJourneys();
-
         model.addAttribute("journeys", journeys);
 
         return "journeys/list";
@@ -58,7 +57,6 @@ public class JourneyController {
         if (bindingResult.hasErrors()) {
             return "journeys/new";
         }
-
         journeyService.save(journey);
         return CONST_REDIRECT;
     }
@@ -80,7 +78,6 @@ public class JourneyController {
             BindingResult bindingResult
     ) {
         if (bindingResult.hasErrors()) return "journeys/update";
-
         journeyService.update(id, journey);
         return CONST_REDIRECT;
     }

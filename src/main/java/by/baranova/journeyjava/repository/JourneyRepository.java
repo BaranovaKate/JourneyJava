@@ -33,7 +33,6 @@ public class JourneyRepository {
             Query<Journey> query = session.createQuery("FROM Journey ", Journey.class);
             return query.list();
         });
-
         return journeys.stream()
                 .map(journeyMapper::toDto)
                 .toList();
