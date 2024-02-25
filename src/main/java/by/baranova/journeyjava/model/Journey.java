@@ -1,4 +1,5 @@
 package by.baranova.journeyjava.model;
+
 import jakarta.persistence.*;
 import java.time.LocalDate;
 

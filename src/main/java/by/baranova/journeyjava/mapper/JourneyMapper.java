@@ -1,6 +1,5 @@
 package by.baranova.journeyjava.mapper;
 
-
 import by.baranova.journeyjava.model.Journey;
 import by.baranova.journeyjava.model.JourneyDto;
 import org.springframework.stereotype.Component;
@@ -17,6 +16,7 @@ public class JourneyMapper {
 
         return dto;
     }
+
     public Journey toEntity(JourneyDto dto) {
         final Journey entity = new Journey();
         entity.setId(dto.getId());

@@ -3,11 +3,9 @@ package by.baranova.journeyjava.model;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-
-import java.io.Serializable;
 import java.time.LocalDate;
 
-public class JourneyDto implements Serializable {
+public class JourneyDto {
 
     private Long id;
 
