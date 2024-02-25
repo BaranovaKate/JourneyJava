@@ -15,6 +15,7 @@ public class JourneyRepository {
 
     private final SessionFactory sessionFactory;
     private final JourneyMapper journeyMapper;
+    private static final String CONST_COUNTRY = "country";
     private static final String CONST_UPDATE = """
                     UPDATE Journey S SET\s
                        S.country = :country,\s
@@ -60,7 +61,7 @@ public class JourneyRepository {
     public List<JourneyDto> findByCountry(String country) {
         final List<Journey> journeys = sessionFactory.fromSession(session -> {
             Query<Journey> query = session.createQuery("FROM Journey S WHERE S.country = :country", Journey.class);
-            query.setParameter("country", country);
+            query.setParameter(CONST_COUNTRY, country);
             return query.list();
         });
 
@@ -75,7 +76,7 @@ public class JourneyRepository {
                 DELETE FROM Journey
                 WHERE country = :country
                 """);
-            query.setParameter("country", country);
+            query.setParameter(CONST_COUNTRY, country);
             query.executeUpdate();
         });
     }
@@ -92,7 +93,7 @@ public class JourneyRepository {
             final MutationQuery query = session.createMutationQuery(CONST_UPDATE);
 
             query.setParameter("id", id);
-            query.setParameter("country", journey.getCountry());
+            query.setParameter(CONST_COUNTRY, journey.getCountry());
             query.setParameter("town", journey.getTown());
             query.setParameter("dateToJourney", journey.getDateToJourney());
             query.setParameter("dateFromJourney", journey.getDateFromJourney());
