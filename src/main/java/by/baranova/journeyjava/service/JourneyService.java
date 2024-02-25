@@ -1,8 +1,10 @@
 package by.baranova.journeyjava.service;
+
 import by.baranova.journeyjava.exception.EntityNotFoundException;
 import by.baranova.journeyjava.repository.JourneyRepository;
 import by.baranova.journeyjava.model.JourneyDto;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
@@ -25,6 +27,14 @@ public class JourneyService {
 
     public void deleteById(Long id) {
         journeyRepository.deleteById(id);
+    }
+
+    public List<JourneyDto> findJourneysByCountry(String country) {
+        return journeyRepository.findByCountry(country);
+    }
+
+    public void deleteByCountry(String country) {
+        journeyRepository.deleteByCountry(country);
     }
 
     public void save(JourneyDto journeyDto) {

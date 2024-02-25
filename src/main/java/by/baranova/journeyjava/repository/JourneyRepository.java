@@ -57,6 +57,29 @@ public class JourneyRepository {
         });
     }
 
+    public List<JourneyDto> findByCountry(String country) {
+        final List<Journey> journeys = sessionFactory.fromSession(session -> {
+            Query<Journey> query = session.createQuery("FROM Journey S WHERE S.country = :country", Journey.class);
+            query.setParameter("country", country);
+            return query.list();
+        });
+
+        return journeys.stream()
+                .map(journeyMapper::toDto)
+                .toList();
+    }
+
+    public void deleteByCountry(String country) {
+        sessionFactory.inTransaction(session -> {
+            final MutationQuery query = session.createMutationQuery("""
+                DELETE FROM Journey
+                WHERE country = :country
+                """);
+            query.setParameter("country", country);
+            query.executeUpdate();
+        });
+    }
+
     public void save(JourneyDto journeyDto) {
         final Journey journey = journeyMapper.toEntity(journeyDto);
         sessionFactory.inTransaction(session -> {

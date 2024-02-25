@@ -1,16 +1,13 @@
 package by.baranova.journeyjava.controller;
 
-
 import by.baranova.journeyjava.exception.EntityNotFoundException;
 import by.baranova.journeyjava.service.JourneyService;
 import by.baranova.journeyjava.model.JourneyDto;
-
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -27,11 +24,22 @@ public class JourneyController {
     }
 
     @GetMapping
-    public String findJourneys(Model model) {
-        final List<JourneyDto> journeys = journeyService.findJourneys();
-        model.addAttribute("journeys", journeys);
+    public String findJourneys(@RequestParam(name = "country", required = false) String country, Model model) {
+        List<JourneyDto> journeys;
 
+        if (country != null) {
+            journeys = journeyService.findJourneysByCountry(country);
+        } else {
+            journeys = journeyService.findJourneys();
+        }
+        model.addAttribute("journeys", journeys);
         return "journeys/list";
+    }
+
+    @DeleteMapping("/delete")
+    public String handleJourneyDeleteByCountry(@RequestParam(name = "country") String country) {
+        journeyService.deleteByCountry(country);
+        return CONST_REDIRECT;
     }
 
     @GetMapping("/{id}")
