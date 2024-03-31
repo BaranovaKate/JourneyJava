@@ -13,7 +13,7 @@
 <form th:method="POST"
       th:action="@{/journeys/{id}(id=${journey.id})}"
       th:object="${journey}">
-    <input type="hidden" name="_method" th:value="'DELETE'">
+    <input type="hidden" name="_method" th:value="'DELETE'" aria-hidden="false">
     <button type="submit">Delete</button>
 </form>
 

@@ -16,8 +16,6 @@
         <input type="text" th:field="*{name}" class="form-control" id="name" placeholder="Название туристического агентства">
         <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Ошибка ввода</div>
     </div>
-
-
     <input class="btn btn-success" type="submit" value="Создать"/>
 </form>
 
