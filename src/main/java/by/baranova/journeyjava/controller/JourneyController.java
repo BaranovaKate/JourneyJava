@@ -27,6 +27,9 @@ import java.util.List;
         + "контроллер позволяет получать, добавлять, "
         + "обновлять и удалять путешествия")
 public class JourneyController {
+
+    private static final String REDIRECT = "redirect:/journeys";
+    private static final String ATTRIBUTE = "journey";
     private static final String ERROR = "404 Not Found: {}";
 
     private final JourneyService journeyService;
@@ -75,7 +78,7 @@ public class JourneyController {
 
             LOGGER.info("Display Journey by id");
             final JourneyDto journey = journeyService.findJourneyById(id);
-            model.addAttribute("journey", journey);
+            model.addAttribute(ATTRIBUTE, journey);
             return "journeys/page";
         } catch (EntityNotFoundException e) {
 
@@ -86,7 +89,7 @@ public class JourneyController {
     }
 
     @GetMapping("/new")
-    public String createJourney(@ModelAttribute("journey") JourneyDto journey) {
+    public String createJourney(@ModelAttribute(ATTRIBUTE) JourneyDto journey) {
         return "journeys/new";
     }
 
@@ -97,13 +100,13 @@ public class JourneyController {
             description = "Создает новое путешествие в базе данных"
     )
     public String handleJourneyCreation(
-            @Valid @ModelAttribute("journey") JourneyDto journey, BindingResult bindingResult) {
+            @Valid @ModelAttribute(ATTRIBUTE) JourneyDto journey, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "journeys/new";
         }
         LOGGER.info("Create Journey");
         journeyService.save(journey);
-        return "redirect:/journeys";
+        return REDIRECT;
     }
 
     @GetMapping("/update/{id}")
@@ -112,7 +115,7 @@ public class JourneyController {
             final JourneyDto journey = journeyService.findJourneyById(id);
             final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             final String formattedDate = journey.getDateToJourney().format(formatter);
-            model.addAttribute("journey", journey);
+            model.addAttribute(ATTRIBUTE, journey);
             model.addAttribute("formattedDate", formattedDate);
             return "journeys/update";
         } catch (EntityNotFoundException e) {
@@ -125,13 +128,13 @@ public class JourneyController {
     @PutMapping("/{id}")
     public String handleJourneyUpdate(
             @PathVariable Long id,
-            @Valid @ModelAttribute("journey") JourneyDto journey,
+            @Valid @ModelAttribute(ATTRIBUTE) JourneyDto journey,
             BindingResult bindingResult
     ) {
         if (bindingResult.hasErrors()) return "journeys/update";
         journeyService.update(id, journey);
         LOGGER.info("Update Journey");
-        return "redirect:/journeys";
+        return REDIRECT;
     }
 
     @PostMapping("/new/bulk/{agency}")
@@ -153,7 +156,7 @@ public class JourneyController {
     public String showDeleteForm(@PathVariable Long id, Model model) {
         try {
             final JourneyDto journey = journeyService.findJourneyById(id);
-            model.addAttribute("journey", journey);
+            model.addAttribute(ATTRIBUTE, journey);
             return "journeys/delete";
         } catch (EntityNotFoundException e) {
             LOGGER.error(ERROR, e.getMessage());
@@ -172,7 +175,7 @@ public class JourneyController {
     public String handleJourneyDelete(@PathVariable Long id) {
         journeyService.deleteById(id);
         LOGGER.info("Delete Journey by id");
-        return "redirect:/journeys";
+        return REDIRECT;
     }
 
 }

@@ -6,9 +6,6 @@ import org.springframework.stereotype.Component;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * Class representing a simple cache based on HashMap.
- */
 @Component
 @Data
 public class Cache {

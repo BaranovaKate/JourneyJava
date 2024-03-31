@@ -28,3 +28,28 @@
 2024-03-31 13:37:01,193 INFO  - Delete Journey by id
 2024-03-31 13:37:01,201 INFO  - Текущее количество запросов: 2
 2024-03-31 13:37:01,202 INFO  - Display all Journeys
+2024-03-31 13:47:19,071 INFO  - Текущее количество запросов: 1
+2024-03-31 13:47:19,072 INFO  - Display all Journeys
+2024-03-31 13:47:20,549 INFO  - Текущее количество запросов: 2
+2024-03-31 13:47:20,549 INFO  - Display Journey by id
+2024-03-31 13:47:21,602 INFO  - Текущее количество запросов: 3
+2024-03-31 13:47:21,603 INFO  - Display all Journeys
+2024-03-31 13:47:21,603 INFO  - Display Journeys from cache
+2024-03-31 13:47:22,388 INFO  - Display Journey from cache
+2024-03-31 13:48:53,998 INFO  - Текущее количество запросов: 1
+2024-03-31 13:48:53,999 INFO  - Display all Journeys
+2024-03-31 13:48:55,771 INFO  - Текущее количество запросов: 2
+2024-03-31 13:48:55,771 INFO  - Display Journey by id
+2024-03-31 13:48:58,438 INFO  - Текущее количество запросов: 3
+2024-03-31 13:48:58,439 INFO  - Display all Journeys
+2024-03-31 13:48:58,439 INFO  - Display Journeys from cache
+2024-03-31 13:48:59,418 INFO  - Текущее количество запросов: 4
+2024-03-31 13:48:59,419 INFO  - Display Journey by id
+2024-03-31 13:48:59,419 INFO  - Display Journey from cache
+2024-03-31 13:49:00,161 INFO  - Текущее количество запросов: 5
+2024-03-31 13:49:00,161 INFO  - Display all Journeys
+2024-03-31 13:49:00,161 INFO  - Display Journeys from cache
+2024-03-31 13:49:02,971 INFO  - Display Journey from cache
+2024-03-31 13:49:04,098 INFO  - Текущее количество запросов: 6
+2024-03-31 13:49:04,098 INFO  - Display all Journeys
+2024-03-31 13:49:04,099 INFO  - Display Journeys from cache
