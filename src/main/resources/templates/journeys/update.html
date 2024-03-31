@@ -39,6 +39,22 @@
              th:if="${#fields.hasErrors('dateFromJourney')}"
              th:errors="*{dateFromJourney}">dateFromJourney</div>
     </div>
+    <div class="mb-3">
+        <label for="travelAgencyName" class="form-label">Название туристического агентства:</label>
+        <input type="text" th:field="*{travelAgency.name}" class="form-control" id="travelAgencyName" placeholder="Название туристического агентства">
+        <div style="color:red" th:if="${#fields.hasErrors('travelAgency.name')}" th:errors="*{travelAgency.name}">Ошибка ввода</div>
+    </div>
+
+    <div class="mb-3">
+        <label for="travelAgencyId" class="form-label">id туристического агентства:</label>
+        <input type="text" th:field="*{travelAgency.id}" class="form-control" id="travelAgencyId" placeholder="id туристического агентства">
+        <div style="color:red" th:if="${#fields.hasErrors('travelAgency.id')}" th:errors="*{travelAgency.id}">Ошибка ввода</div>
+    </div>
+<!--    <div class="mb-3">-->
+<!--        <label for="travelAgency" class="form-label">Введите тур-агентство:</label>-->
+<!--        <input type="text" th:field="*{travelAgency}" class="form-control" id="travelAgency" placeholder="Тур-агентство">-->
+<!--        <div style="color:red" th:if="${#fields.hasErrors('travelAgency')}" th:errors="*{travelAgency}">travelAgency</div>-->
+<!--    </div>-->
     <input class="btn btn-success" type="submit" value="Сохранить"/>
 </form>
 

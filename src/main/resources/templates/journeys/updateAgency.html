@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Тур агентства</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+</head>
+<body class="container-md">
+
+<form th:method="PUT"
+      th:action="@{/travel-agencies/{id}(id=${agencyDto.id})}"
+      th:object="${agencyDto}">
+
+    <div class="mb-3">
+        <label for="name" class="form-label">Название туристического агентства:</label>
+        <input type="text" th:field="*{name}" class="form-control" id="name" placeholder="Название туристического агентства">
+        <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Ошибка ввода</div>
+    </div>
+
+    <div class="mb-3">
+        <label for="id" class="form-label">id туристического агентства:</label>
+        <input type="text" th:field="*{id}" class="form-control" id="id" placeholder="id туристического агентства">
+        <div style="color:red" th:if="${#fields.hasErrors('id')}" th:errors="*{id}">Ошибка ввода</div>
+    </div>
+
+    <input class="btn btn-success" type="submit" value="Сохранить"/>
+</form>
+
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>

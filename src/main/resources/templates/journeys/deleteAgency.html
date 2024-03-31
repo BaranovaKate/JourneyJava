@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Удаление путешествия</title>
+</head>
+<body>
+
+<h2>Удалить путешествие</h2>
+
+<p>Вы уверены что хотите удалить путешествие <span th:text="${agency.name}"></span>?</p>
+
+<form th:method="POST"
+      th:action="@{/travel-agencies/{id}(id=${agency.id})}"
+      th:object="${agency}">
+    <input type="hidden" name="_method" th:value="'DELETE'">
+    <button type="submit">Delete</button>
+</form>
+
+<a th:href="@{/travel-agencies}">Вернуться домой</a>
+
+</body>
+</html>

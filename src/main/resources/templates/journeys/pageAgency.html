@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Тур агентства</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+</head>
+<body class="container-md">
+<h1>Список туристический агентств</h1>
+<div>
+    <p>ID тур агентства: <span th:text="${agency.id}"></span></p>
+    <p>Название тур агентства: <span th:text="${agency.name}"></span></p>
+    <h2>Список путешествий</h2>
+    <ul>
+        <li th:each="journey : ${agency.journeys}">
+            <p>Страна: <span th:text="${journey.country}"></span></p>
+            <p>Город: <span th:text="${journey.town}"></span></p>
+            <p>Дата выезда: <span th:text="${journey.dateToJourney}"></span></p>
+            <p>Дата возвращения: <span th:text="${journey.dateFromJourney}"></span></p>
+        </li>
+    </ul>
+</div>
+<a class="btn btn-secondary" th:href="@{/travel-agencies}">Вернуться домой</a>
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>

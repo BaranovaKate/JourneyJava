@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Путешествия</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+</head>
+<body class="container-md">
+<h1>Список Туристических агентств</h1>
+
+<div class="card" style="width: 18rem;" th:each="agency : ${agencies}">
+    <div class="card-body">
+        <h5 class="card-title" th:text="${agency.name}"> Agency name</h5>
+        <a th:href="@{/travel-agencies/{id}(id=${agency.id})}">Подробнее</a>
+        <a th:href="@{/travel-agencies/update/{id}(id=${agency.id})}">Изменить</a>
+        <a th:href="@{/travel-agencies/delete/{id}(id=${agency.id})}">Удалить</a>
+    </div>
+</div>
+<a class="btn btn-secondary" th:href="@{/travel-agencies/new}">Добавить путешествие</a>
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>

@@ -1,9 +1,17 @@
 package by.baranova.journeyjava.controller;
 
-import by.baranova.journeyjava.exception.EntityNotFoundException;
+import by.baranova.journeyjava.dto.JourneyDto;
+import by.baranova.journeyjava.service.CounterServiceJourney;
 import by.baranova.journeyjava.service.JourneyService;
-import by.baranova.journeyjava.model.JourneyDto;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,99 +22,157 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/journeys")
+@AllArgsConstructor
+@Tag(name = "Работа с путешествиями", description = "Данный "
+        + "контроллер позволяет получать, добавлять, "
+        + "обновлять и удалять путешествия")
 public class JourneyController {
+    private static final String ERROR = "404 Not Found: {}";
 
-    private static final String CONST_ATTRIBUTE = "journey";
-    private static final String CONST_REDIRECT = "redirect:/journeys";
     private final JourneyService journeyService;
-
-    public JourneyController(JourneyService journeyService) {
-        this.journeyService = journeyService;
-    }
+    static final Logger LOGGER = LogManager.getLogger(JourneyController.class);
 
     @GetMapping
-    public String findJourneys(@RequestParam(name = "country", required = false) String country, Model model) {
+    @Operation(
+            method = "GET",
+            summary = "Получить список всех путешествий",
+            description = "Выводит список всех путешествий. "
+                    + "Так же выполняет поиск по стране"
+    )
+    public String findJourneys(final @RequestParam(
+            name = "country", required = false) String country, Model model) {
         List<JourneyDto> journeys;
-
         if (country != null) {
+            LOGGER.info("Display Journeys by country");
             journeys = journeyService.findJourneysByCountry(country);
         } else {
+
+            CounterServiceJourney.incrementRequestCount();
+            int requestCount = CounterServiceJourney.getRequestCount();
+            LOGGER.info("Текущее количество запросов: {}", requestCount);
+
+            LOGGER.info("Display all Journeys");
             journeys = journeyService.findJourneys();
         }
         model.addAttribute("journeys", journeys);
         return "journeys/list";
     }
 
-    @DeleteMapping("/delete")
-    public String handleJourneyDeleteByCountry(@RequestParam(name = "country") String country) {
-        journeyService.deleteByCountry(country);
-        return CONST_REDIRECT;
-    }
-
     @GetMapping("/{id}")
+    @Operation(
+            method = "GET",
+            summary = "Получить путешествие по id",
+            description = "Выводит путешествие по id,"
+                    + " содержащееся в базе данных"
+    )
     public String findJourney(Model model, @PathVariable("id") Long id) {
         try {
+
+            CounterServiceJourney.incrementRequestCount();
+            int requestCount = CounterServiceJourney.getRequestCount();
+            LOGGER.info("Текущее количество запросов: {}", requestCount);
+
+
+            LOGGER.info("Display Journey by id");
             final JourneyDto journey = journeyService.findJourneyById(id);
-            model.addAttribute(CONST_ATTRIBUTE, journey);
+            model.addAttribute("journey", journey);
             return "journeys/page";
         } catch (EntityNotFoundException e) {
+
+            LOGGER.error(ERROR, e.getMessage());
             model.addAttribute("errorMessage", e.getMessage());
             return "journeys/error";
         }
     }
 
     @GetMapping("/new")
-    public String createJourney(@ModelAttribute(CONST_ATTRIBUTE) JourneyDto student) {
+    public String createJourney(@ModelAttribute("journey") JourneyDto journey) {
         return "journeys/new";
     }
 
     @PostMapping("/new")
+    @Operation(
+            method = "POST",
+            summary = "Создать путешествие",
+            description = "Создает новое путешествие в базе данных"
+    )
     public String handleJourneyCreation(
-            @Valid @ModelAttribute(CONST_ATTRIBUTE) JourneyDto journey, BindingResult bindingResult) {
+            @Valid @ModelAttribute("journey") JourneyDto journey, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "journeys/new";
         }
+        LOGGER.info("Create Journey");
         journeyService.save(journey);
-        return CONST_REDIRECT;
+        return "redirect:/journeys";
     }
 
     @GetMapping("/update/{id}")
     public String updateJourney(@PathVariable Long id, Model model) {
-        final JourneyDto journey = journeyService.findJourneyById(id);
-        final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        final String formattedDate = journey.getDateToJourney().format(formatter);
-        model.addAttribute(CONST_ATTRIBUTE, journey);
-        model.addAttribute("formattedDate", formattedDate);
-        return "journeys/update";
+        try {
+            final JourneyDto journey = journeyService.findJourneyById(id);
+            final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            final String formattedDate = journey.getDateToJourney().format(formatter);
+            model.addAttribute("journey", journey);
+            model.addAttribute("formattedDate", formattedDate);
+            return "journeys/update";
+        } catch (EntityNotFoundException e) {
+            LOGGER.error(ERROR, e.getMessage());
+            model.addAttribute("errorMessage", e.getMessage());
+            return "journeys/error";
+        }
     }
 
     @PutMapping("/{id}")
     public String handleJourneyUpdate(
             @PathVariable Long id,
-            @Valid @ModelAttribute(CONST_ATTRIBUTE) JourneyDto journey,
+            @Valid @ModelAttribute("journey") JourneyDto journey,
             BindingResult bindingResult
     ) {
         if (bindingResult.hasErrors()) return "journeys/update";
         journeyService.update(id, journey);
-        return CONST_REDIRECT;
+        LOGGER.info("Update Journey");
+        return "redirect:/journeys";
+    }
+
+    @PostMapping("/new/bulk/{agency}")
+    public ResponseEntity<String> createJourneysBulk(@RequestBody List<JourneyDto> journeyDtos,
+                                                     @PathVariable("agency") String agency) {
+        LOGGER.info("POST endpoint /journeys/new/bulk/{agency} was called");
+
+        try {
+            journeyService.createJourneysBulk(journeyDtos, agency);
+            return ResponseEntity.ok("Successfully created journeys in bulk for agency: " + agency);
+        } catch (Exception e) {
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error: " + e.getMessage());
+        }
     }
 
     @GetMapping("/delete/{id}")
     public String showDeleteForm(@PathVariable Long id, Model model) {
         try {
             final JourneyDto journey = journeyService.findJourneyById(id);
-            model.addAttribute(CONST_ATTRIBUTE, journey);
+            model.addAttribute("journey", journey);
             return "journeys/delete";
         } catch (EntityNotFoundException e) {
+            LOGGER.error(ERROR, e.getMessage());
             model.addAttribute("errorMessage", e.getMessage());
             return "journeys/error";
         }
     }
 
+    @Operation(
+            method = "DELETE",
+            summary = "Удалить путешествие по id",
+            description = "Удаляет путешествие по id,"
+                    + " из базы данных"
+    )
     @DeleteMapping("/{id}")
     public String handleJourneyDelete(@PathVariable Long id) {
         journeyService.deleteById(id);
-        return CONST_REDIRECT;
+        LOGGER.info("Delete Journey by id");
+        return "redirect:/journeys";
     }
-}
 
+}
