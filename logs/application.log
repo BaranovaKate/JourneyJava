@@ -8,3 +8,23 @@
 2024-03-31 13:15:31,565 INFO  - Display all Journeys
 2024-03-31 13:15:32,613 INFO  - Текущее количество запросов: 4
 2024-03-31 13:15:32,614 INFO  - Display Journey by id
+2024-03-31 13:25:18,182 INFO  - Display Travel Agencies
+2024-03-31 13:25:25,035 INFO  - Display Travel Agencies
+2024-03-31 13:33:02,532 INFO  - Текущее количество запросов: 1
+2024-03-31 13:33:02,534 INFO  - Display all Journeys
+2024-03-31 13:33:03,774 INFO  - Текущее количество запросов: 2
+2024-03-31 13:33:03,775 INFO  - Display all Journeys
+2024-03-31 13:33:03,775 INFO  - Display Journeys from cache
+2024-03-31 13:33:12,466 ERROR - 405 Method Not Allowed
+2024-03-31 13:33:33,358 INFO  - Текущее количество запросов: 1
+2024-03-31 13:33:33,359 INFO  - Display all Journeys
+2024-03-31 13:33:37,327 INFO  - Delete Journey by id
+2024-03-31 13:33:37,334 INFO  - Текущее количество запросов: 2
+2024-03-31 13:33:37,334 INFO  - Display all Journeys
+2024-03-31 13:36:13,883 INFO  - Текущее количество запросов: 1
+2024-03-31 13:36:13,884 INFO  - Display all Journeys
+2024-03-31 13:36:56,823 INFO  - Текущее количество запросов: 1
+2024-03-31 13:36:56,825 INFO  - Display all Journeys
+2024-03-31 13:37:01,193 INFO  - Delete Journey by id
+2024-03-31 13:37:01,201 INFO  - Текущее количество запросов: 2
+2024-03-31 13:37:01,202 INFO  - Display all Journeys

@@ -10,10 +10,9 @@
 
 <p>Вы уверены что хотите удалить путешествие <span th:text="${agency.name}"></span>?</p>
 
-<form th:method="POST"
+<form th:method="DELETE"
       th:action="@{/travel-agencies/{id}(id=${agency.id})}"
       th:object="${agency}">
-    <input type="hidden" name="_method" th:value="'DELETE'" aria-hidden="false">
     <button type="submit">Delete</button>
 </form>
 
