@@ -27,7 +27,8 @@ import java.util.List;
         + "контроллер позволяет получать, добавлять, "
         + "обновлять и удалять путешествия")
 public class JourneyController {
-
+    private static final String ERROR_MESSAGE = "errorMessage";
+    private static final String ERROR_REDIRECT = "journeys/error";
     private static final String REDIRECT = "redirect:/journeys";
     private static final String ATTRIBUTE = "journey";
     private static final String ERROR = "404 Not Found: {}";
@@ -83,8 +84,8 @@ public class JourneyController {
         } catch (EntityNotFoundException e) {
 
             LOGGER.error(ERROR, e.getMessage());
-            model.addAttribute("errorMessage", e.getMessage());
-            return "journeys/error";
+            model.addAttribute(ERROR_MESSAGE, e.getMessage());
+            return ERROR_REDIRECT;
         }
     }
 
@@ -120,8 +121,8 @@ public class JourneyController {
             return "journeys/update";
         } catch (EntityNotFoundException e) {
             LOGGER.error(ERROR, e.getMessage());
-            model.addAttribute("errorMessage", e.getMessage());
-            return "journeys/error";
+            model.addAttribute(ERROR_MESSAGE, e.getMessage());
+            return ERROR_REDIRECT;
         }
     }
 
@@ -160,8 +161,8 @@ public class JourneyController {
             return "journeys/delete";
         } catch (EntityNotFoundException e) {
             LOGGER.error(ERROR, e.getMessage());
-            model.addAttribute("errorMessage", e.getMessage());
-            return "journeys/error";
+            model.addAttribute(ERROR_MESSAGE, e.getMessage());
+            return ERROR_REDIRECT;
         }
     }
 

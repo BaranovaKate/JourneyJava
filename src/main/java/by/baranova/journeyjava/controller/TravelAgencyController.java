@@ -24,6 +24,8 @@ import java.util.List;
         description = "Данный контроллер позволяет получать,"
                 + " добавлять, обновлять и удалять тур агенства")
 public class TravelAgencyController {
+    private static final String ERROR_MESSAGE = "errorMessage";
+    private static final String ERROR_REDIRECT = "journeys/error";
     private static final String REDIRECT = "redirect:/travel-agencies";
     private static final String ERROR = "404 Not Found: {}";
 
@@ -47,8 +49,8 @@ public class TravelAgencyController {
             return "journeys/pageAgency";
         } catch (EntityNotFoundException e) {
             LOGGER.error(ERROR, e.getMessage());
-            model.addAttribute("errorMessage", e.getMessage());
-            return "journeys/error";
+            model.addAttribute(ERROR_MESSAGE, e.getMessage());
+            return ERROR_REDIRECT;
         }
     }
 
@@ -109,8 +111,8 @@ public class TravelAgencyController {
             return "journeys/deleteAgency";
         } catch (EntityNotFoundException e) {
             LOGGER.error(ERROR, e.getMessage());
-            model.addAttribute("errorMessage", e.getMessage());
-            return "journeys/error";
+            model.addAttribute(ERROR_MESSAGE, e.getMessage());
+            return ERROR_REDIRECT;
         }
     }
 
@@ -122,8 +124,8 @@ public class TravelAgencyController {
             return "journeys/updateAgency";
         } catch (EntityNotFoundException e) {
             LOGGER.error(ERROR, e.getMessage());
-            model.addAttribute("errorMessage", e.getMessage());
-            return "journeys/error";
+            model.addAttribute(ERROR_MESSAGE, e.getMessage());
+            return ERROR_REDIRECT;
         }
     }
 
