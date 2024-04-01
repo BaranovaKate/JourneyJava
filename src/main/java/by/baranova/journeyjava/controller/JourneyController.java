@@ -1,7 +1,7 @@
 package by.baranova.journeyjava.controller;
 
 import by.baranova.journeyjava.dto.JourneyDto;
-import by.baranova.journeyjava.service.CounterServiceJourney;
+import by.baranova.journeyjava.service.CounterService;
 import by.baranova.journeyjava.service.JourneyService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -50,9 +50,8 @@ public class JourneyController {
             LOGGER.info("Display Journeys by country");
             journeys = journeyService.findJourneysByCountry(country);
         } else {
-
-            CounterServiceJourney.incrementRequestCount();
-            int requestCount = CounterServiceJourney.getRequestCount();
+            CounterService.incrementRequestCount();
+            int requestCount = CounterService.getRequestCount();
             LOGGER.info("Текущее количество запросов: {}", requestCount);
 
             LOGGER.info("Display all Journeys");
@@ -72,8 +71,8 @@ public class JourneyController {
     public String findJourney(Model model, @PathVariable("id") Long id) {
         try {
 
-            CounterServiceJourney.incrementRequestCount();
-            int requestCount = CounterServiceJourney.getRequestCount();
+            CounterService.incrementRequestCount();
+            int requestCount = CounterService.getRequestCount();
             LOGGER.info("Текущее количество запросов: {}", requestCount);
 
 
@@ -126,7 +125,13 @@ public class JourneyController {
         }
     }
 
+
     @PutMapping("/{id}")
+    @Operation(
+            method = "PUT",
+            summary = "Создать путешествие",
+            description = "Создает новое путешествие в базе данных"
+    )
     public String handleJourneyUpdate(
             @PathVariable Long id,
             @Valid @ModelAttribute(ATTRIBUTE) JourneyDto journey,
@@ -139,6 +144,12 @@ public class JourneyController {
     }
 
     @PostMapping("/new/bulk/{agency}")
+    @PutMapping("/{id}")
+    @Operation(
+            method = "PUT",
+            summary = "Создать путешествие по агентству",
+            description = "Создает новое путешествие в базе данных"
+    )
     public ResponseEntity<String> createJourneysBulk(@RequestBody List<JourneyDto> journeyDtos,
                                                      @PathVariable("agency") String agency) {
         LOGGER.info("POST endpoint /journeys/new/bulk/{agency} was called");

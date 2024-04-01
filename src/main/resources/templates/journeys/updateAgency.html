@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <title>Тур агентства</title>
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <style>
+        .add-button {
+            margin-top: 20px;
+            margin-right: 20px;
+        }
+    </style>
 </head>
 <body class="container-md">
 
@@ -25,7 +31,7 @@
 
     <input class="btn btn-success" type="submit" value="Сохранить"/>
 </form>
-
+<a class="btn btn-secondary add-button" th:href="@{/travel-agencies}">Вернуться домой</a>
 <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
 </body>
 </html>

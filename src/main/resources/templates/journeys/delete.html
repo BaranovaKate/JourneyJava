@@ -3,20 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <title>Удаление путешествия</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <style>
+        button {
+            background-color: #dc3545;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        a, h2, p, form {
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #c82333;
+        }
+    </style>
 </head>
-<body>
+<body class="container-md">
 
 <h2>Удалить путешествие</h2>
 
-<p>Вы уверены что хотите удалить путешествие <span th:text="${journey.country}"></span>?</p>
+<p>Вы уверены, что хотите удалить путешествие "<span th:text="${journey.country}"></span>"?</p>
 
 <form th:method="DELETE"
       th:action="@{/journeys/{id}(id=${journey.id})}"
       th:object="${journey}">
-    <button type="submit">Delete</button>
+    <button type="submit">Удалить</button>
 </form>
-
-<a th:href="@{/journeys}">Вернуться домой</a>
-
+<a class="btn btn-secondary" th:href="@{/journeys}">Вернуться домой</a>
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
 </body>
 </html>

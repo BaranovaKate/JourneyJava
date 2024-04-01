@@ -3,6 +3,7 @@ package by.baranova.journeyjava.controller;
 import by.baranova.journeyjava.dto.TravelAgencyDto;
 import by.baranova.journeyjava.model.TravelAgency;
 import by.baranova.journeyjava.service.AgencyService;
+import by.baranova.journeyjava.service.CounterService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.persistence.EntityNotFoundException;
@@ -64,6 +65,11 @@ public class TravelAgencyController {
     public String getAllTravelAgenciesWithJourneys(Model model) {
         List<TravelAgency> agencies;
         LOGGER.info("Display Travel Agencies");
+
+        CounterService.incrementRequestCount();
+        int requestCount = CounterService.getRequestCount();
+        LOGGER.info("Текущее количество запросов: {}", requestCount);
+
         agencies = agencyService.findAgencies();
         model.addAttribute("agencies", agencies);
         return "journeys/listAgency";

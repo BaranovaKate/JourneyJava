@@ -10,7 +10,7 @@
 <div>
     <p>ID тур агентства: <span th:text="${agency.id}"></span></p>
     <p>Название тур агентства: <span th:text="${agency.name}"></span></p>
-    <h2>Список путешествий</h2>
+    <h3>Список путешествий</h3>
     <ul>
         <li th:each="journey : ${agency.journeys}">
             <p>Страна: <span th:text="${journey.country}"></span></p>

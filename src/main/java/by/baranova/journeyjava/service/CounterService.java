@@ -3,9 +3,9 @@ import lombok.Data;
 
 import java.util.concurrent.atomic.AtomicInteger;
 @Data
-public class CounterServiceJourney {
+public class CounterService {
 
-    private CounterServiceJourney() {}
+    private CounterService() {}
     private static AtomicInteger requestCount = new AtomicInteger(0);
 
     public static synchronized void incrementRequestCount() {
@@ -16,8 +16,3 @@ public class CounterServiceJourney {
         return requestCount.get();
     }
 }
-
-
-
-
-

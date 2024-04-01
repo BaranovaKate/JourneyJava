@@ -4,19 +4,41 @@
     <meta charset="UTF-8">
     <title>Путешествия</title>
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <style>
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .card {
+            flex: 0 0 calc(33.333% - 20px);
+        }
+
+        .add-button {
+            margin-top: 20px;
+            margin-right: 20px;
+        }
+    </style>
 </head>
 <body class="container-md">
 <h1>Список Туристических агентств</h1>
 
-<div class="card" style="width: 18rem;" th:each="agency : ${agencies}">
-    <div class="card-body">
-        <h5 class="card-title" th:text="${agency.name}"> Agency name</h5>
-        <a th:href="@{/travel-agencies/{id}(id=${agency.id})}">Подробнее</a>
-        <a th:href="@{/travel-agencies/update/{id}(id=${agency.id})}">Изменить</a>
-        <a th:href="@{/travel-agencies/delete/{id}(id=${agency.id})}">Удалить</a>
+<div class="card-container">
+    <div th:each="agency : ${agencies}">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${agency.name}"> Agency name</h5>
+                <a th:href="@{/travel-agencies/{id}(id=${agency.id})}">Подробнее</a>
+                <a th:href="@{/travel-agencies/update/{id}(id=${agency.id})}">Изменить</a>
+                <a th:href="@{/travel-agencies/delete/{id}(id=${agency.id})}">Удалить</a>
+            </div>
+        </div>
     </div>
 </div>
-<a class="btn btn-secondary" th:href="@{/travel-agencies/new}">Добавить путешествие</a>
+<a class="btn btn-secondary add-button" th:href="@{/travel-agencies/new}">Добавить агентство</a>
+<a class="btn btn-secondary add-button" th:href="@{/journeys}">Путешествия</a>
 <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
 </body>
 </html>
+
