@@ -144,7 +144,6 @@ public class JourneyController {
     }
 
     @PostMapping("/new/bulk/{agency}")
-    @PutMapping("/{id}")
     @Operation(
             method = "PUT",
             summary = "Создать путешествие по агентству",
