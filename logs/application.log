@@ -10440,3 +10440,148 @@
   Подробности: Ошибочная строка содержит (2024-04-01, 2024-04-01, 40, null, string, string).
 2024-04-01 21:07:17,645 ERROR - ОШИБКА: значение NULL в столбце "travel_agency_id" отношения "journeys" нарушает ограничение NOT NULL
   Подробности: Ошибочная строка содержит (2024-04-01, 2024-04-01, 41, null, string, string).
+2024-04-01 21:48:53,741 INFO  - Текущее количество запросов: 1
+2024-04-01 21:48:53,744 INFO  - Display all Journeys
+2024-04-01 21:48:56,619 INFO  - Текущее количество запросов: 2
+2024-04-01 21:48:56,620 INFO  - Display Journey by id
+2024-04-01 21:48:58,588 INFO  - Текущее количество запросов: 3
+2024-04-01 21:48:58,588 INFO  - Display all Journeys
+2024-04-01 21:48:58,588 INFO  - Display Journeys from cache
+2024-04-01 21:48:59,542 INFO  - Display Journey from cache
+2024-04-01 21:49:01,781 INFO  - Текущее количество запросов: 4
+2024-04-01 21:49:01,781 INFO  - Display all Journeys
+2024-04-01 21:49:01,781 INFO  - Display Journeys from cache
+2024-04-01 21:49:03,005 INFO  - Display Journey from cache
+2024-04-01 21:49:04,499 INFO  - Текущее количество запросов: 5
+2024-04-01 21:49:04,499 INFO  - Display all Journeys
+2024-04-01 21:49:04,499 INFO  - Display Journeys from cache
+2024-04-01 21:49:07,631 INFO  - Текущее количество запросов: 6
+2024-04-01 21:49:07,632 INFO  - Display all Journeys
+2024-04-01 21:49:07,632 INFO  - Display Journeys from cache
+2024-04-01 21:49:08,759 INFO  - Display Travel Agencies
+2024-04-01 21:49:08,760 INFO  - Текущее количество запросов: 7
+2024-04-01 21:49:10,521 INFO  - Display Travel Agencies by id
+2024-04-01 21:49:11,734 INFO  - Display Travel Agencies
+2024-04-01 21:49:11,734 INFO  - Текущее количество запросов: 8
+2024-04-01 21:49:13,756 INFO  - Display Travel Agencies
+2024-04-01 21:49:13,756 INFO  - Текущее количество запросов: 9
+2024-04-01 21:49:15,893 INFO  - Display Travel Agencies
+2024-04-01 21:49:15,893 INFO  - Текущее количество запросов: 10
+2024-04-01 21:49:17,149 INFO  - Текущее количество запросов: 11
+2024-04-01 21:49:17,149 INFO  - Display all Journeys
+2024-04-01 21:49:17,149 INFO  - Display Journeys from cache
+2024-04-01 21:56:10,130 INFO  - Display Journey from cache
+2024-04-01 21:56:11,880 INFO  - Текущее количество запросов: 12
+2024-04-01 21:56:11,880 INFO  - Display all Journeys
+2024-04-01 21:56:11,880 INFO  - Display Journeys from cache
+2024-04-01 21:56:21,730 INFO  - Текущее количество запросов: 13
+2024-04-01 21:56:21,730 INFO  - Display all Journeys
+2024-04-01 21:56:21,730 INFO  - Display Journeys from cache
+2024-04-01 21:56:22,827 INFO  - Display Travel Agencies
+2024-04-01 21:56:22,827 INFO  - Текущее количество запросов: 14
+2024-04-01 21:56:25,011 INFO  - Create Travel Agencies
+2024-04-01 21:56:25,019 INFO  - Display Travel Agencies
+2024-04-01 21:56:25,019 INFO  - Текущее количество запросов: 15
+2024-04-01 21:56:28,340 INFO  - Delete Travel Agency by Id
+2024-04-01 21:56:28,345 INFO  - Display Travel Agencies
+2024-04-01 21:56:28,345 INFO  - Текущее количество запросов: 16
+2024-04-01 21:58:42,793 INFO  - Display Travel Agencies
+2024-04-01 21:58:42,797 INFO  - Текущее количество запросов: 1
+2024-04-01 21:58:44,333 INFO  - Create Travel Agencies
+2024-04-01 21:58:44,340 INFO  - Display Travel Agencies
+2024-04-01 21:58:44,340 INFO  - Текущее количество запросов: 2
+2024-04-01 21:58:48,845 INFO  - Delete Travel Agency by Id
+2024-04-01 21:58:48,851 INFO  - Display Travel Agencies
+2024-04-01 21:58:48,852 INFO  - Текущее количество запросов: 3
+2024-04-01 22:01:17,244 INFO  - Display Travel Agencies
+2024-04-01 22:01:17,247 INFO  - Текущее количество запросов: 1
+2024-04-01 22:01:29,452 INFO  - Display Travel Agencies
+2024-04-01 22:01:29,452 INFO  - Текущее количество запросов: 2
+2024-04-01 22:01:34,304 INFO  - Create Travel Agencies
+2024-04-01 22:01:34,310 INFO  - Display Travel Agencies
+2024-04-01 22:01:34,311 INFO  - Текущее количество запросов: 3
+2024-04-01 22:01:36,515 INFO  - Delete Travel Agency by Id
+2024-04-01 22:01:36,520 INFO  - Display Travel Agencies
+2024-04-01 22:01:36,521 INFO  - Текущее количество запросов: 4
+2024-04-01 22:02:35,800 INFO  - Display Travel Agencies by id
+2024-04-01 22:02:54,769 INFO  - Update Agency
+2024-04-01 22:02:54,776 INFO  - Display Travel Agencies
+2024-04-01 22:02:54,780 INFO  - Текущее количество запросов: 1
+2024-04-01 22:02:57,121 INFO  - Display Travel Agencies by id
+2024-04-01 22:03:00,374 INFO  - Display Travel Agencies
+2024-04-01 22:03:00,374 INFO  - Текущее количество запросов: 2
+2024-04-01 22:03:04,173 INFO  - Display Travel Agencies by id
+2024-04-01 22:03:17,661 INFO  - Update Agency
+2024-04-01 22:03:17,670 INFO  - Display Travel Agencies
+2024-04-01 22:03:17,670 INFO  - Текущее количество запросов: 3
+2024-04-01 22:03:21,546 INFO  - Display Travel Agencies by id
+2024-04-01 22:03:23,165 INFO  - Display Travel Agencies
+2024-04-01 22:03:23,166 INFO  - Текущее количество запросов: 4
+2024-04-01 22:03:31,777 INFO  - Create Travel Agencies
+2024-04-01 22:03:31,782 INFO  - Display Travel Agencies
+2024-04-01 22:03:31,783 INFO  - Текущее количество запросов: 5
+2024-04-01 22:08:03,698 INFO  - Display Travel Agencies
+2024-04-01 22:08:03,699 INFO  - Текущее количество запросов: 6
+2024-04-01 22:08:10,706 ERROR - ОШИБКА: значение не умещается в тип character varying(64)
+2024-04-01 22:08:10,714 ERROR - 500 Internal Server Error
+2024-04-01 22:08:26,265 INFO  - Create Travel Agencies
+2024-04-01 22:08:26,272 INFO  - Display Travel Agencies
+2024-04-01 22:08:26,272 INFO  - Текущее количество запросов: 7
+2024-04-01 22:08:29,099 INFO  - Delete Travel Agency by Id
+2024-04-01 22:08:29,106 INFO  - Display Travel Agencies
+2024-04-01 22:08:29,106 INFO  - Текущее количество запросов: 8
+2024-04-01 22:08:31,381 INFO  - Delete Travel Agency by Id
+2024-04-01 22:08:31,387 INFO  - Display Travel Agencies
+2024-04-01 22:08:31,387 INFO  - Текущее количество запросов: 9
+2024-04-01 22:08:43,455 INFO  - Текущее количество запросов: 10
+2024-04-01 22:08:43,456 INFO  - Display all Journeys
+2024-04-01 22:08:50,333 ERROR - 500 Internal Server Error
+2024-04-01 22:08:56,677 ERROR - 500 Internal Server Error
+2024-04-01 22:09:42,976 INFO  - Текущее количество запросов: 1
+2024-04-01 22:09:42,978 INFO  - Display all Journeys
+2024-04-01 22:09:43,754 INFO  - Текущее количество запросов: 2
+2024-04-01 22:09:43,754 INFO  - Display Journey by id
+2024-04-01 22:09:45,662 INFO  - Display Journey from cache
+2024-04-01 22:09:52,114 ERROR - 500 Internal Server Error
+2024-04-01 22:09:59,811 ERROR - 500 Internal Server Error
+2024-04-01 22:11:14,102 INFO  - Текущее количество запросов: 1
+2024-04-01 22:11:14,103 INFO  - Display all Journeys
+2024-04-01 22:11:22,614 INFO  - Текущее количество запросов: 2
+2024-04-01 22:11:22,615 INFO  - Display all Journeys
+2024-04-01 22:11:22,615 INFO  - Display Journeys from cache
+2024-04-01 22:12:10,761 INFO  - Update Journey
+2024-04-01 22:12:10,774 INFO  - Текущее количество запросов: 1
+2024-04-01 22:12:10,774 INFO  - Display all Journeys
+2024-04-01 22:12:19,107 INFO  - Update Journey
+2024-04-01 22:12:19,111 INFO  - Текущее количество запросов: 2
+2024-04-01 22:12:19,112 INFO  - Display all Journeys
+2024-04-01 22:12:33,503 INFO  - Текущее количество запросов: 3
+2024-04-01 22:12:33,503 INFO  - Display all Journeys
+2024-04-01 22:12:33,504 INFO  - Display Journeys from cache
+2024-04-01 22:12:34,380 INFO  - Display Travel Agencies
+2024-04-01 22:12:34,380 INFO  - Текущее количество запросов: 4
+2024-04-01 22:12:42,444 INFO  - Display Travel Agencies
+2024-04-01 22:12:42,444 INFO  - Текущее количество запросов: 5
+2024-04-01 22:12:44,739 INFO  - Create Travel Agencies
+2024-04-01 22:12:44,744 INFO  - Display Travel Agencies
+2024-04-01 22:12:44,745 INFO  - Текущее количество запросов: 6
+2024-04-01 22:12:47,289 INFO  - Delete Travel Agency by Id
+2024-04-01 22:12:47,294 INFO  - Display Travel Agencies
+2024-04-01 22:12:47,294 INFO  - Текущее количество запросов: 7
+2024-04-01 22:12:50,976 ERROR - 404 Not Found: Agency with ID 19 not found
+2024-04-01 22:12:51,673 ERROR - 404 Not Found: Agency with ID 19 not found
+2024-04-01 22:12:51,955 ERROR - 404 Not Found: Agency with ID 19 not found
+2024-04-01 22:12:53,537 INFO  - Текущее количество запросов: 8
+2024-04-01 22:12:53,538 INFO  - Display all Journeys
+2024-04-01 22:12:53,538 INFO  - Display Journeys from cache
+2024-04-01 22:13:31,014 INFO  - Текущее количество запросов: 1
+2024-04-01 22:13:31,015 INFO  - Display all Journeys
+2024-04-01 22:13:35,795 ERROR - 500 Internal Server Error
+2024-04-01 22:15:37,426 INFO  - Текущее количество запросов: 1
+2024-04-01 22:15:37,428 INFO  - Display all Journeys
+2024-04-01 22:15:42,722 INFO  - Текущее количество запросов: 2
+2024-04-01 22:15:42,723 INFO  - Display all Journeys
+2024-04-01 22:15:42,723 INFO  - Display Journeys from cache
+2024-04-01 22:15:51,732 INFO  - Текущее количество запросов: 3
+2024-04-01 22:15:51,733 INFO  - Display all Journeys
+2024-04-01 22:15:51,733 INFO  - Display Journeys from cache
