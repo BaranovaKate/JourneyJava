@@ -381,6 +381,39 @@ class TravelAgencyTest {
         assertEquals(travelAgency, journey.getTravelAgency());
     }
 
+
+    @Test
+    void testEqualsAndHashCodeWithNullObject() {
+        Journey journey = new Journey();
+        assertFalse(journey.equals(null));
+        // Хэш-код объекта не должен вызывать исключения NullPointerException
+        assertDoesNotThrow(journey::hashCode);
+    }
+
+
+    @Test
+    void testEqualsAndHashCodeWithSameObject() {
+        Journey journey = new Journey();
+        assertTrue(journey.equals(journey));
+        assertEquals(journey.hashCode(), journey.hashCode());
+    }
+
+    @Test
+    void testEqualsAndHashCodeWithDifferentFieldValues() {
+        Journey journey1 = new Journey();
+        journey1.setId(1L);
+        journey1.setCountry("Country1");
+        journey1.setTown("Town1");
+
+        Journey journey2 = new Journey();
+        journey2.setId(2L);
+        journey2.setCountry("Country2");
+        journey2.setTown("Town2");
+
+        assertNotEquals(journey1, journey2);
+        assertNotEquals(journey1.hashCode(), journey2.hashCode());
+    }
+
 }
 //
 //class TravelAgencyTest {
