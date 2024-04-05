@@ -3,13 +3,19 @@ package by.baranova.journeyjava.repository;
 import by.baranova.journeyjava.dto.TravelAgencyDto;
 import by.baranova.journeyjava.model.TravelAgency;
 import jakarta.persistence.EntityNotFoundException;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
+import java.util.Collections;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -60,5 +66,20 @@ class TravelAgencyRepositoryTest {
 
         // Assertions
         assertEquals("Агентство с id " + id + " не существует", exception.getMessage());
+    }
+
+    @Test
+    void testSave() {
+        // Arrange
+        SessionFactory sessionFactory = mock(SessionFactory.class);
+        TravelAgency travelAgency = new TravelAgency();
+
+        TravelAgencyRepository travelAgencyRepository = new TravelAgencyRepository(sessionFactory);
+
+        // Act
+        travelAgencyRepository.save(travelAgency);
+
+        // Assert
+        verify(sessionFactory).inTransaction(any());
     }
 }

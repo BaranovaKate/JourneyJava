@@ -89,4 +89,99 @@ class TravelAgencyDtoTest {
         assertEquals(travelAgencyDto1.hashCode(), travelAgencyDto2.hashCode());
         assertNotEquals(travelAgencyDto1.hashCode(), travelAgencyDto3.hashCode());
     }
+
+    @Test
+    void getId() {
+        // Arrange
+        Long id = 1L;
+        TravelAgencyDto travelAgencyDto = new TravelAgencyDto();
+        travelAgencyDto.setId(id);
+
+        // Act & Assert
+        assertEquals(id, travelAgencyDto.getId());
+    }
+
+    @Test
+    void getName() {
+        // Arrange
+        String name = "TestName";
+        TravelAgencyDto travelAgencyDto = new TravelAgencyDto();
+        travelAgencyDto.setName(name);
+
+        // Act & Assert
+        assertEquals(name, travelAgencyDto.getName());
+    }
+
+    @Test
+    void setId() {
+        // Arrange
+        Long id = 1L;
+        TravelAgencyDto travelAgencyDto = new TravelAgencyDto();
+
+        // Act
+        travelAgencyDto.setId(id);
+
+        // Assert
+        assertEquals(id, travelAgencyDto.getId());
+    }
+
+    @Test
+    void setName() {
+        // Arrange
+        String name = "TestName";
+        TravelAgencyDto travelAgencyDto = new TravelAgencyDto();
+
+        // Act
+        travelAgencyDto.setName(name);
+
+        // Assert
+        assertEquals(name, travelAgencyDto.getName());
+    }
+
+    @Test
+    void testEquals() {
+        // Arrange
+        TravelAgencyDto travelAgencyDto1 = new TravelAgencyDto();
+        travelAgencyDto1.setId(1L);
+        travelAgencyDto1.setName("TestName");
+
+        TravelAgencyDto travelAgencyDto2 = new TravelAgencyDto();
+        travelAgencyDto2.setId(1L);
+        travelAgencyDto2.setName("TestName");
+
+        // Act & Assert
+        assertTrue(travelAgencyDto1.equals(travelAgencyDto2));
+    }
+
+    @Test
+    void canEqual() {
+        // Arrange
+        TravelAgencyDto travelAgencyDto1 = new TravelAgencyDto();
+        travelAgencyDto1.setId(1L);
+        travelAgencyDto1.setName("TestName");
+
+        TravelAgencyDto travelAgencyDto2 = new TravelAgencyDto();
+        travelAgencyDto2.setId(1L);
+        travelAgencyDto2.setName("TestName");
+
+        // Act & Assert
+        assertTrue(travelAgencyDto1.canEqual(travelAgencyDto2));
+    }
+
+    @Test
+    void testHashCode() {
+        // Arrange
+        TravelAgencyDto travelAgencyDto1 = new TravelAgencyDto();
+        travelAgencyDto1.setId(1L);
+        travelAgencyDto1.setName("TestName");
+
+        TravelAgencyDto travelAgencyDto2 = new TravelAgencyDto();
+        travelAgencyDto2.setId(1L);
+        travelAgencyDto2.setName("TestName");
+
+        // Act & Assert
+        assertEquals(travelAgencyDto1.hashCode(), travelAgencyDto2.hashCode());
+    }
+
+
 }

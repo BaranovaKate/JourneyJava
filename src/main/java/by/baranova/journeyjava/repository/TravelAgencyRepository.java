@@ -20,19 +20,9 @@ import java.util.List;
 @Repository
 public class TravelAgencyRepository {
 
-    /**
-     * The Hibernate SessionFactory for database interactions.
-     */
+
     private final SessionFactory sessionFactory;
 
-    /**
-     * Retrieves a travel agency by its ID along
-     * with its associated journeys.
-     *
-     * @param id The ID of the travel agency to retrieve.
-     * @return The travel agency with the specified ID,
-     * including its associated journeys.
-     */
     public TravelAgency findById(final Long id) {
         return sessionFactory.fromSession(session -> {
             Query<TravelAgency> query = session.createQuery("""
@@ -44,13 +34,7 @@ public class TravelAgencyRepository {
         });
     }
 
-    /**
-     * Retrieves all travel agencies along with their
-     * associated journeys.
-     *
-     * @return A list of travel agencies, each including
-     * its associated journeys.
-     */
+
     public List<TravelAgency> findAllWithJourneys() {
         return sessionFactory.fromSession(session -> {
             Query<TravelAgency> query = session
@@ -61,22 +45,9 @@ public class TravelAgencyRepository {
         });
     }
 
-    /**
-     * Saves a new travel agency to the database.
-     *
-     * @param travelAgency The travel agency to be saved.
-     */
     public void save(final TravelAgency travelAgency) {
         sessionFactory.inTransaction(session -> session.persist(travelAgency));
     }
-
-    /**
-     * Deletes a travel agency by its ID.
-     *
-     * @param id The ID of the travel agency to delete.
-     * @throws EntityNotFoundException If the travel agency
-     *                                 with the specified ID is not found.
-     */
 
     public void deleteById(final Long id) {
         TravelAgency agencyToDelete = findById(id);
@@ -94,16 +65,6 @@ public class TravelAgencyRepository {
         });
     }
 
-
-    /**
-     * Updates a travel agency's information based
-     * on the provided ID and updated data.
-     *
-     * @param id            The ID of the travel agency to update.
-     * @param updatedAgency The updated data for the travel agency.
-     * @throws EntityNotFoundException If the travel
-     * agency with the specified ID is not found.
-     */
     public void update(final Long id, final TravelAgencyDto updatedAgency) {
         if (findById(id) == null) {
             throw new EntityNotFoundException(

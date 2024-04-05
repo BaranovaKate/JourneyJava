@@ -116,4 +116,166 @@ class JourneyDtoTest {
         assertEquals(journeyDto1.hashCode(), journeyDto2.hashCode());
         assertNotEquals(journeyDto1.hashCode(), journeyDto3.hashCode());
     }
+
+    @Test
+    void getId() {
+        // Arrange
+        Long id = 1L;
+        JourneyDto journeyDto = new JourneyDto();
+        journeyDto.setId(id);
+
+        // Act & Assert
+        assertEquals(id, journeyDto.getId());
+    }
+
+    @Test
+    void getCountry() {
+        // Arrange
+        String country = "TestCountry";
+        JourneyDto journeyDto = new JourneyDto();
+        journeyDto.setCountry(country);
+
+        // Act & Assert
+        assertEquals(country, journeyDto.getCountry());
+    }
+    @Test
+    void testEquals() {
+        // Arrange
+        JourneyDto journeyDto1 = new JourneyDto();
+        JourneyDto journeyDto2 = new JourneyDto();
+
+        // Act & Assert
+        assertEquals(journeyDto1, journeyDto2);
+    }
+
+    @Test
+    void canEqual() {
+        // Arrange
+        JourneyDto journeyDto1 = new JourneyDto();
+        JourneyDto journeyDto2 = new JourneyDto();
+
+        // Act & Assert
+        assertTrue(journeyDto1.canEqual(journeyDto2));
+    }
+    @Test
+    void getTown() {
+        // Arrange
+        String town = "TestTown";
+        JourneyDto journeyDto = new JourneyDto();
+        journeyDto.setTown(town);
+
+        // Act & Assert
+        assertEquals(town, journeyDto.getTown());
+    }
+
+    @Test
+    void getDateToJourney() {
+        // Arrange
+        LocalDate dateToJourney = LocalDate.of(2022, 4, 1);
+        JourneyDto journeyDto = new JourneyDto();
+        journeyDto.setDateToJourney(dateToJourney);
+
+        // Act & Assert
+        assertEquals(dateToJourney, journeyDto.getDateToJourney());
+    }
+
+    @Test
+    void getDateFromJourney() {
+        // Arrange
+        LocalDate dateFromJourney = LocalDate.of(2022, 3, 30);
+        JourneyDto journeyDto = new JourneyDto();
+        journeyDto.setDateFromJourney(dateFromJourney);
+
+        // Act & Assert
+        assertEquals(dateFromJourney, journeyDto.getDateFromJourney());
+    }
+
+    @Test
+    void getTravelAgency() {
+        // Arrange
+        TravelAgencyDto travelAgencyDto = new TravelAgencyDto();
+        JourneyDto journeyDto = new JourneyDto();
+        journeyDto.setTravelAgency(travelAgencyDto);
+
+        // Act & Assert
+        assertEquals(travelAgencyDto, journeyDto.getTravelAgency());
+    }
+
+    @Test
+    void setId() {
+        // Arrange
+        Long id = 1L;
+        JourneyDto journeyDto = new JourneyDto();
+
+        // Act
+        journeyDto.setId(id);
+
+        // Assert
+        assertEquals(id, journeyDto.getId());
+    }
+
+    @Test
+    void setCountry() {
+        // Arrange
+        String country = "TestCountry";
+        JourneyDto journeyDto = new JourneyDto();
+
+        // Act
+        journeyDto.setCountry(country);
+
+        // Assert
+        assertEquals(country, journeyDto.getCountry());
+    }
+
+    @Test
+    void setTown() {
+        // Arrange
+        String town = "TestTown";
+        JourneyDto journeyDto = new JourneyDto();
+
+        // Act
+        journeyDto.setTown(town);
+
+        // Assert
+        assertEquals(town, journeyDto.getTown());
+    }
+
+    @Test
+    void setDateToJourney() {
+        // Arrange
+        LocalDate dateToJourney = LocalDate.of(2022, 4, 1);
+        JourneyDto journeyDto = new JourneyDto();
+
+        // Act
+        journeyDto.setDateToJourney(dateToJourney);
+
+        // Assert
+        assertEquals(dateToJourney, journeyDto.getDateToJourney());
+    }
+
+    @Test
+    void setDateFromJourney() {
+        // Arrange
+        LocalDate dateFromJourney = LocalDate.of(2022, 3, 30);
+        JourneyDto journeyDto = new JourneyDto();
+
+        // Act
+        journeyDto.setDateFromJourney(dateFromJourney);
+
+        // Assert
+        assertEquals(dateFromJourney, journeyDto.getDateFromJourney());
+    }
+
+    @Test
+    void setTravelAgency() {
+        // Arrange
+        TravelAgencyDto travelAgencyDto = new TravelAgencyDto();
+        JourneyDto journeyDto = new JourneyDto();
+
+        // Act
+        journeyDto.setTravelAgency(travelAgencyDto);
+
+        // Assert
+        assertEquals(travelAgencyDto, journeyDto.getTravelAgency());
+    }
 }

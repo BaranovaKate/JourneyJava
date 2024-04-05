@@ -15,6 +15,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CacheTest {
 
+    private Cache cache;
+
+    @BeforeEach
+    void setUp() {
+        cache = new Cache();
+    }
+
     @Test
     void putAndGet() {
         // Arrange
@@ -111,6 +118,25 @@ class CacheTest {
         // Act & Assert
         assertTrue(cache1.canEqual(cache2));
     }
+
+
+    @Test
+    void testEquals() {
+        // Arrange
+        Cache anotherCache = new Cache();
+
+        // Act & Assert
+        assertEquals(cache, anotherCache);
+    }
+    @Test
+    void testHashCode() {
+        // Arrange
+        Cache anotherCache = new Cache();
+
+        // Act & Assert
+        assertEquals(cache.hashCode(), anotherCache.hashCode());
+    }
+
 }
 //
 //public class CacheTest {

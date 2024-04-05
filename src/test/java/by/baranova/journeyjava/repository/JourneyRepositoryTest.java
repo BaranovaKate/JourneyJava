@@ -3,6 +3,7 @@ package by.baranova.journeyjava.repository;
 import by.baranova.journeyjava.dto.JourneyDto;
 import by.baranova.journeyjava.mapper.JourneyMapper;
 import by.baranova.journeyjava.model.Journey;
+import by.baranova.journeyjava.service.JourneyService;
 import jakarta.persistence.EntityNotFoundException;
 import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,6 +22,9 @@ import static org.mockito.ArgumentMatchers.any;
 
 class JourneyRepositoryTest {
 
+
+    @InjectMocks
+    private JourneyService journeyService;
     @Mock
     private SessionFactory sessionFactory;
 

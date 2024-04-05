@@ -10,13 +10,14 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.support.SessionStatus;
 
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
+import org.springframework.test.web.servlet.ResultActions;
 class JourneyControllerTest {
 
     @Mock
@@ -81,18 +82,18 @@ class JourneyControllerTest {
         verify(model, times(1)).addAttribute("journey", journeyDto);
     }
 
+
 //    @Test
 //    void testFindJourney_NonExistingId() {
-//        // Mocking the behavior
-//        Long id = 1L;
-//        when(journeyService.findJourneyById(id)).thenThrow(EntityNotFoundException.class);
+//        // Arrange
+//        when(journeyService.findJourneyById(anyLong())).thenThrow(EntityNotFoundException.class);
 //
-//        // Calling the method under test
-//        String viewName = journeyController.findJourney(model, id);
+//        // Act
+//        String viewName = journeyController.findJourney(model, 2L);
 //
-//        // Assertions
+//        // Assert
 //        assertEquals("journeys/error", viewName);
-//        verify(model, times(1)).addAttribute("errorMessage", "404 Not Found: null");
+//        verify(model).addAttribute("errorMessage");
 //    }
 
     @Test
