@@ -57,4 +57,24 @@ public class CacheTest {
         cache.clear();
         assertEquals(0, cache.getHashMap().size());
     }
+
+    @Test
+    void testDataAnnotation() {
+        Cache cache1 = new Cache();
+        Cache cache2 = new Cache();
+
+        // Устанавливаем значение для ключа "testKey"
+        cache1.put("testKey", "testValue");
+
+        // Проверяем, что методы getter и setter работают корректно
+        assertEquals("testValue", cache1.get("testKey"));
+        cache1.put("testKey", "newValue");
+        assertEquals("newValue", cache1.get("testKey"));
+
+        // Проверяем, что метод toString() возвращает не нулевое значение
+        assertNotNull(cache1.toString());
+
+        // Проверяем, что объекты cache1 и cache2 не являются одним и тем же объектом
+        assertNotSame(cache1, cache2);
+    }
 }
