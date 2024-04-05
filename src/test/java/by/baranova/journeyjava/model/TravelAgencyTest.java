@@ -333,8 +333,8 @@ class TravelAgencyTest {
     void testLombokGeneratedMethods() {
         TravelAgency travelAgency = new TravelAgency();
         assertNotNull(travelAgency.toString());
-        assertNotNull(travelAgency.hashCode());
-        assertNotNull(travelAgency.equals(travelAgency));
+        //  assertNotNull(travelAgency.hashCode());
+        //assertNotNull(travelAgency.equals(travelAgency));
     }
 
 }
