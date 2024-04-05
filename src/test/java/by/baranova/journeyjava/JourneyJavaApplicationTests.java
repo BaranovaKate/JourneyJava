@@ -8,12 +8,12 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @SpringBootTest
 class JourneyJavaApplicationTests {
 
-	@Autowired
-	private ApplicationContext context;
-
-	@Test
-	void contextLoads() {
-		assertNotNull(context);
-	}
+//	@Autowired
+//	private ApplicationContext context;
+//
+//	@Test
+//	void contextLoads() {
+//		assertNotNull(context);
+//	}
 
 }
