@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Field;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -333,8 +334,51 @@ class TravelAgencyTest {
     void testLombokGeneratedMethods() {
         TravelAgency travelAgency = new TravelAgency();
         assertNotNull(travelAgency.toString());
-        //  assertNotNull(travelAgency.hashCode());
-        //assertNotNull(travelAgency.equals(travelAgency));
+    }
+
+    @Test
+    void testGetterAndSetterForId() {
+        Journey journey = new Journey();
+        journey.setId(1L);
+        assertEquals(1L, journey.getId());
+    }
+
+    @Test
+    void testGetterAndSetterForCountry() {
+        Journey journey = new Journey();
+        journey.setCountry("Country");
+        assertEquals("Country", journey.getCountry());
+    }
+
+    @Test
+    void testGetterAndSetterForTown() {
+        Journey journey = new Journey();
+        journey.setTown("Town");
+        assertEquals("Town", journey.getTown());
+    }
+
+    @Test
+    void testGetterAndSetterForDateToJourney() {
+        Journey journey = new Journey();
+        LocalDate dateToJourney = LocalDate.of(2024, 3, 15);
+        journey.setDateToJourney(dateToJourney);
+        assertEquals(dateToJourney, journey.getDateToJourney());
+    }
+
+    @Test
+    void testGetterAndSetterForDateFromJourney() {
+        Journey journey = new Journey();
+        LocalDate dateFromJourney = LocalDate.of(2024, 3, 20);
+        journey.setDateFromJourney(dateFromJourney);
+        assertEquals(dateFromJourney, journey.getDateFromJourney());
+    }
+
+    @Test
+    void testGetterAndSetterForTravelAgency() {
+        Journey journey = new Journey();
+        TravelAgency travelAgency = new TravelAgency();
+        journey.setTravelAgency(travelAgency);
+        assertEquals(travelAgency, journey.getTravelAgency());
     }
 
 }
