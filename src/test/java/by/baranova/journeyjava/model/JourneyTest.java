@@ -1,8 +1,13 @@
 package by.baranova.journeyjava.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.Column;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.Field;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -475,62 +480,80 @@ class JourneyTest {
         assertNotEquals(journey1, obj);
         assertNotEquals(journey1.hashCode(), obj.hashCode());
     }
+
     @Test
-    void testSetterAndGetters() {
-        // Arrange
-        Journey journey = new Journey();
-        Long id = 1L;
-        String country = "Country";
-        String town = "Town";
-        LocalDate dateToJourney = LocalDate.of(2024, 3, 15);
-        LocalDate dateFromJourney = LocalDate.of(2024, 3, 20);
-        TravelAgency travelAgency = new TravelAgency();
-
-        // Act
-        journey.setId(id);
-        journey.setCountry(country);
-        journey.setTown(town);
-        journey.setDateToJourney(dateToJourney);
-        journey.setDateFromJourney(dateFromJourney);
-        journey.setTravelAgency(travelAgency);
-
-        // Assert
-        assertEquals(id, journey.getId());
-        assertEquals(country, journey.getCountry());
-        assertEquals(town, journey.getTown());
-        assertEquals(dateToJourney, journey.getDateToJourney());
-        assertEquals(dateFromJourney, journey.getDateFromJourney());
-        assertEquals(travelAgency, journey.getTravelAgency());
+    void testIdAnnotation() {
+        try {
+            Field field = Journey.class.getDeclaredField("id");
+            assertNotNull(field.getAnnotation(Id.class));
+        } catch (NoSuchFieldException e) {
+            fail("Field 'id' not found");
+        }
     }
 
     @Test
-    void testConstructorAndGetters() {
-        // Arrange
-        Long id = 1L;
-        String country = "Country";
-        String town = "Town";
-        LocalDate dateToJourney = LocalDate.of(2024, 3, 15);
-        LocalDate dateFromJourney = LocalDate.of(2024, 3, 20);
-        TravelAgency travelAgency = new TravelAgency();
-
-        // Act
-        Journey journey = new Journey();
-        journey.setId(id);
-        journey.setCountry(country);
-        journey.setTown(town);
-        journey.setDateToJourney(dateToJourney);
-        journey.setDateFromJourney(dateFromJourney);
-        journey.setTravelAgency(travelAgency);
-
-        // Assert
-        assertEquals(id, journey.getId());
-        assertEquals(country, journey.getCountry());
-        assertEquals(town, journey.getTown());
-        assertEquals(dateToJourney, journey.getDateToJourney());
-        assertEquals(dateFromJourney, journey.getDateFromJourney());
-        assertEquals(travelAgency, journey.getTravelAgency());
+    void testColumnAnnotationForCountry() {
+        try {
+            Field field = Journey.class.getDeclaredField("country");
+            Column columnAnnotation = field.getAnnotation(Column.class);
+            assertNotNull(columnAnnotation);
+            assertEquals("country", columnAnnotation.name());
+            assertFalse(columnAnnotation.nullable());
+            assertEquals(32, columnAnnotation.length());
+        } catch (NoSuchFieldException e) {
+            fail("Field 'country' not found");
+        }
     }
 
+    @Test
+    void testColumnAnnotationForTown() {
+        try {
+            Field field = Journey.class.getDeclaredField("town");
+            Column columnAnnotation = field.getAnnotation(Column.class);
+            assertNotNull(columnAnnotation);
+            assertEquals("town", columnAnnotation.name());
+            assertFalse(columnAnnotation.nullable());
+            assertEquals(32, columnAnnotation.length());
+        } catch (NoSuchFieldException e) {
+            fail("Field 'town' not found");
+        }
+    }
+
+    @Test
+    void testColumnAnnotationForDateToJourney() {
+        try {
+            Field field = Journey.class.getDeclaredField("dateToJourney");
+            Column columnAnnotation = field.getAnnotation(Column.class);
+            assertNotNull(columnAnnotation);
+            assertEquals("dateToJourney", columnAnnotation.name());
+            assertFalse(columnAnnotation.nullable());
+        } catch (NoSuchFieldException e) {
+            fail("Field 'dateToJourney' not found");
+        }
+    }
+
+    @Test
+    void testColumnAnnotationForDateFromJourney() {
+        try {
+            Field field = Journey.class.getDeclaredField("dateFromJourney");
+            Column columnAnnotation = field.getAnnotation(Column.class);
+            assertNotNull(columnAnnotation);
+            assertEquals("dateFromJourney", columnAnnotation.name());
+            assertFalse(columnAnnotation.nullable());
+        } catch (NoSuchFieldException e) {
+            fail("Field 'dateFromJourney' not found");
+        }
+    }
+    @Test
+    void testManyToOneAnnotationForTravelAgency() {
+        try {
+            Field field = Journey.class.getDeclaredField("travelAgency");
+            ManyToOne manyToOneAnnotation = field.getAnnotation(ManyToOne.class);
+            assertNotNull(manyToOneAnnotation);
+        } catch (NoSuchFieldException e) {
+            fail("Field 'travelAgency' not found");
+        }
+    }
 
 
 }

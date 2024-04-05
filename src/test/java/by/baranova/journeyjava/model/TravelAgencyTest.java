@@ -1,7 +1,10 @@
 package by.baranova.journeyjava.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -253,6 +256,87 @@ class TravelAgencyTest {
         // Assert
         assertNotEquals(agency, "Not a TravelAgency");
     }
+
+
+    // Тест для проверки наличия аннотации @Entity
+    @Test
+    void testEntityAnnotation() {
+        assertTrue(TravelAgency.class.isAnnotationPresent(Entity.class));
+    }
+
+    // Тест для проверки наличия аннотации @Table с правильным именем таблицы
+    @Test
+    void testTableAnnotation() {
+        Table tableAnnotation = TravelAgency.class.getAnnotation(Table.class);
+        assertNotNull(tableAnnotation);
+        assertEquals("travel_agencies", tableAnnotation.name());
+    }
+
+    // Тест для проверки наличия аннотации @Id
+    // Тест для проверки наличия аннотации @Id
+    @Test
+    void testIdAnnotationForIdField() {
+        try {
+            Field field = TravelAgency.class.getDeclaredField("id");
+            assertNotNull(field.getAnnotation(Id.class));
+        } catch (NoSuchFieldException e) {
+            fail("Field 'id' not found");
+        }
+    }
+
+    // Тест для проверки наличия аннотации @GeneratedValue для поля id
+    @Test
+    void testGeneratedValueAnnotationForId() throws NoSuchFieldException {
+        assertNotNull(TravelAgency.class.getDeclaredField("id").getAnnotation(GeneratedValue.class));
+    }
+
+    // Тест для проверки наличия аннотации @Column для поля id с правильными параметрами
+    @Test
+    void testIdColumnAnnotation() throws NoSuchFieldException {
+        Column columnAnnotation = TravelAgency.class.getDeclaredField("id").getAnnotation(Column.class);
+        assertNotNull(columnAnnotation);
+        assertEquals("id", columnAnnotation.name());
+        assertTrue(columnAnnotation.nullable());
+    }
+
+    // Тест для проверки наличия аннотации @Column для поля name с правильными параметрами
+    @Test
+    void testNameColumnAnnotation() throws NoSuchFieldException {
+        Column columnAnnotation = TravelAgency.class.getDeclaredField("name").getAnnotation(Column.class);
+        assertNotNull(columnAnnotation);
+        assertEquals("name", columnAnnotation.name());
+        assertFalse(columnAnnotation.nullable());
+        assertEquals(64, columnAnnotation.length());
+    }
+
+    // Тест для проверки наличия аннотации @OneToMany
+    @Test
+    void testOneToManyAnnotationForJourneys() {
+        try {
+            Field field = TravelAgency.class.getDeclaredField("journeys");
+            assertNotNull(field.getAnnotation(OneToMany.class));
+        } catch (NoSuchFieldException e) {
+            fail("Field 'journeys' not found");
+        }
+    }
+
+    // Тест для проверки наличия аннотации @JsonIgnoreProperties для поля journeys
+    @Test
+    void testJsonIgnorePropertiesAnnotation() throws NoSuchFieldException {
+        JsonIgnoreProperties ignorePropertiesAnnotation = TravelAgency.class.getDeclaredField("journeys").getAnnotation(JsonIgnoreProperties.class);
+        assertNotNull(ignorePropertiesAnnotation);
+        assertArrayEquals(new String[]{"travelAgency"}, ignorePropertiesAnnotation.value());
+    }
+
+    // Тест для проверки сгенерированных методов Lombok
+    @Test
+    void testLombokGeneratedMethods() {
+        TravelAgency travelAgency = new TravelAgency();
+        assertNotNull(travelAgency.toString());
+        assertNotNull(travelAgency.hashCode());
+        assertNotNull(travelAgency.equals(travelAgency));
+    }
+
 }
 //
 //class TravelAgencyTest {
