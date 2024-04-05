@@ -44,4 +44,5 @@ public class Journey {
     @JoinColumn(name = "travel_agency_id", nullable = false)
     @JsonIgnoreProperties("journeys")
     private TravelAgency travelAgency;
+
 }
