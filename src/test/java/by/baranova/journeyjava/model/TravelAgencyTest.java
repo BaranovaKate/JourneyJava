@@ -61,4 +61,65 @@ class TravelAgencyTest {
         assertEquals(agency1.hashCode(), agency2.hashCode());
         assertNotEquals(agency1.hashCode(), agency3.hashCode());
     }
+
+    @Test
+    void testEmptyConstructor() {
+        // Arrange
+        TravelAgency travelAgency = new TravelAgency();
+
+        // Assert
+        assertNull(travelAgency.getId());
+        assertNull(travelAgency.getName());
+        assertNull(travelAgency.getJourneys());
+    }
+
+    @Test
+    void testSetter() {
+        // Arrange
+        Long id = 1L;
+        String name = "Travel Agency";
+        List<Journey> journeys = new ArrayList<>();
+        TravelAgency travelAgency = new TravelAgency();
+
+        // Act
+        travelAgency.setId(id);
+        travelAgency.setName(name);
+        travelAgency.setJourneys(journeys);
+
+        // Assert
+        assertEquals(id, travelAgency.getId());
+        assertEquals(name, travelAgency.getName());
+        assertEquals(journeys, travelAgency.getJourneys());
+    }
+
+    @Test
+    void testEqualsAndHashCodeWithNull() {
+        // Arrange
+        TravelAgency agency1 = new TravelAgency();
+        TravelAgency agency2 = new TravelAgency();
+
+        // Assert
+        assertEquals(agency1, agency2);
+        assertEquals(agency1.hashCode(), agency2.hashCode());
+    }
+
+    @Test
+    void testEqualsAndHashCodeWithSameReference() {
+        // Arrange
+        TravelAgency agency1 = new TravelAgency();
+        TravelAgency agency2 = agency1;
+
+        // Assert
+        assertEquals(agency1, agency2);
+        assertEquals(agency1.hashCode(), agency2.hashCode());
+    }
+
+    @Test
+    void testEqualsAndHashCodeWithDifferentClass() {
+        // Arrange
+        TravelAgency agency = new TravelAgency();
+
+        // Assert
+        assertNotEquals(agency, "Not a TravelAgency");
+    }
 }

@@ -1,5 +1,6 @@
 package by.baranova.journeyjava.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -73,5 +74,94 @@ class JourneyTest {
         assertNotEquals(journey1, journey3);
         assertEquals(journey1.hashCode(), journey2.hashCode());
         assertNotEquals(journey1.hashCode(), journey3.hashCode());
+    }
+    @Test
+    void testConstructorWithNullValues() {
+        // Arrange
+        Journey journey = new Journey();
+
+        // Act
+        journey.setId(null);
+        journey.setCountry(null);
+        journey.setTown(null);
+        journey.setDateToJourney(null);
+        journey.setDateFromJourney(null);
+        journey.setTravelAgency(null);
+
+        // Assert
+        assertNull(journey.getId());
+        assertNull(journey.getCountry());
+        assertNull(journey.getTown());
+        assertNull(journey.getDateToJourney());
+        assertNull(journey.getDateFromJourney());
+        assertNull(journey.getTravelAgency());
+    }
+
+    @Test
+    void testEqualsAndHashCodeWithNullObject() {
+        // Arrange
+        Journey journey = new Journey();
+        journey.setId(1L);
+        journey.setCountry("Country");
+        journey.setTown("Town");
+
+        // Act
+        boolean resultEquals = journey == null;
+        int hashCode = journey.hashCode();
+
+        // Assert
+        assertFalse(resultEquals);
+        assertNotEquals(0, hashCode);
+    }
+    @Test
+    void testEqualsAndHashCodeWithDifferentClass() {
+        // Arrange
+        Journey journey = new Journey();
+        journey.setId(1L);
+        journey.setCountry("Country");
+        journey.setTown("Town");
+
+        // Act
+        boolean resultEquals = journey.equals("not_a_journey");
+        int hashCode = journey.hashCode();
+
+        // Assert
+        assertFalse(resultEquals);
+        assertNotEquals(0, hashCode);
+    }
+
+    @Test
+    void testEqualsAndHashCodeWithSameObject() {
+        // Arrange
+        Journey journey = new Journey();
+        journey.setId(1L);
+        journey.setCountry("Country");
+        journey.setTown("Town");
+
+        // Act
+        boolean resultEquals = journey.equals(journey);
+        int hashCode = journey.hashCode();
+
+        // Assert
+        assertTrue(resultEquals);
+        assertEquals(journey.hashCode(), hashCode);
+    }
+
+    @Test
+    void testEqualsAndHashCodeWithDifferentFieldValues() {
+        // Arrange
+        Journey journey1 = new Journey();
+        journey1.setId(1L);
+        journey1.setCountry("Country1");
+        journey1.setTown("Town1");
+
+        Journey journey2 = new Journey();
+        journey2.setId(2L);
+        journey2.setCountry("Country2");
+        journey2.setTown("Town2");
+
+        // Assert
+        assertNotEquals(journey1, journey2);
+        assertNotEquals(journey1.hashCode(), journey2.hashCode());
     }
 }
