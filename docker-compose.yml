@@ -26,28 +26,3 @@ services:
     environment:
       SPRING_DATASOURCE_URL: 'jdbc:postgresql://journey_db:5432/journeys'
       JAVA_OPTS: '-Xmx512'
-
-
-
-#      version: '3.8'
-#
-#      services:
-#        app:
-#          image: thegwinbest/test:1.0.0
-#          ports:
-#            - 8080:8080
-#          environment:
-#            SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/my_db?autoReconnect=true&allowPublicKeyRetrieval=true&useSSL=false
-#            SPRING_DATASOURCE_USERNAME: root
-#            SPRING_DATASOURCE_PASSWORD: admin
-#          depends_on:
-#            - db
-#
-#        db:
-#          image: mysql:8.0.27
-#          environment:
-#            DATABASE_HOST: docker-mysql
-#            DATABASE_PORT: 3306
-#            MYSQL_ROOT_PASSWORD: admin
-#            MYSQL_DATABASE: my_db
-#          command: --default-authentication-plugin=mysql_native_password
