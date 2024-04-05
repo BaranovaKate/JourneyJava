@@ -5,8 +5,6 @@ import by.baranova.journeyjava.mapper.JourneyMapper;
 import by.baranova.journeyjava.model.Journey;
 import jakarta.persistence.EntityNotFoundException;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.MutationQuery;
-import org.hibernate.query.Query;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -18,6 +16,8 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+import static org.mockito.ArgumentMatchers.any;
+
 
 class JourneyRepositoryTest {
 
@@ -65,20 +65,6 @@ class JourneyRepositoryTest {
         // Add more assertions based on the expected behavior
     }
 
-//    @Test
-//    void testDeleteById_JourneyExists() {
-//        // Mocking the data
-//        Long id = 1L;
-//        JourneyDto journeyDto = new JourneyDto();
-//        when(journeyRepository.findById(id)).thenReturn(Optional.of(journeyDto));
-//
-//        // Calling the method under test
-//        journeyRepository.deleteById(id);
-//
-//        // Verify that sessionFactory.inTransaction() is called
-//        verify(sessionFactory, times(1)).inTransaction(any());
-//        // Add more verifications based on the expected behavior
-//    }
 
     @Test
     void testDeleteById_JourneyNotExists() {
@@ -111,20 +97,6 @@ class JourneyRepositoryTest {
         // Add more verifications based on the expected behavior
     }
 
-//    @Test
-//    void testUpdate_JourneyExists() {
-//        // Mocking the data
-//        Long id = 1L;
-//        JourneyDto journeyDto = new JourneyDto();
-//        when(journeyRepository.findById(id)).thenReturn(Optional.of(journeyDto));
-//
-//        // Calling the method under test
-//        journeyRepository.update(id, journeyDto);
-//
-//        // Verify that sessionFactory.inTransaction() is called
-//        verify(sessionFactory, times(1)).inTransaction(any());
-//        // Add more verifications based on the expected behavior
-//    }
 
     @Test
     void testUpdate_JourneyNotExists() {
@@ -142,5 +114,4 @@ class JourneyRepositoryTest {
         // Add more assertions based on the expected behavior
     }
 
-    // Add more test cases for other methods
 }
