@@ -459,6 +459,80 @@ class JourneyTest {
         assertNotEquals(journey1.hashCode(), journey2.hashCode());
     }
 
+    @Test
+    void testEqualsAndHashCodeWithDifferentInstances() {
+        // Arrange
+        Journey journey1 = new Journey();
+        journey1.setId(1L);
+        journey1.setCountry("Country");
+        journey1.setTown("Town");
+        journey1.setDateToJourney(LocalDate.of(2024, 3, 15));
+        journey1.setDateFromJourney(LocalDate.of(2024, 3, 20));
+
+        Object obj = new Object();
+
+        // Assert
+        assertNotEquals(journey1, obj);
+        assertNotEquals(journey1.hashCode(), obj.hashCode());
+    }
+    @Test
+    void testSetterAndGetters() {
+        // Arrange
+        Journey journey = new Journey();
+        Long id = 1L;
+        String country = "Country";
+        String town = "Town";
+        LocalDate dateToJourney = LocalDate.of(2024, 3, 15);
+        LocalDate dateFromJourney = LocalDate.of(2024, 3, 20);
+        TravelAgency travelAgency = new TravelAgency();
+
+        // Act
+        journey.setId(id);
+        journey.setCountry(country);
+        journey.setTown(town);
+        journey.setDateToJourney(dateToJourney);
+        journey.setDateFromJourney(dateFromJourney);
+        journey.setTravelAgency(travelAgency);
+
+        // Assert
+        assertEquals(id, journey.getId());
+        assertEquals(country, journey.getCountry());
+        assertEquals(town, journey.getTown());
+        assertEquals(dateToJourney, journey.getDateToJourney());
+        assertEquals(dateFromJourney, journey.getDateFromJourney());
+        assertEquals(travelAgency, journey.getTravelAgency());
+    }
+
+    @Test
+    void testConstructorAndGetters() {
+        // Arrange
+        Long id = 1L;
+        String country = "Country";
+        String town = "Town";
+        LocalDate dateToJourney = LocalDate.of(2024, 3, 15);
+        LocalDate dateFromJourney = LocalDate.of(2024, 3, 20);
+        TravelAgency travelAgency = new TravelAgency();
+
+        // Act
+        Journey journey = new Journey();
+        journey.setId(id);
+        journey.setCountry(country);
+        journey.setTown(town);
+        journey.setDateToJourney(dateToJourney);
+        journey.setDateFromJourney(dateFromJourney);
+        journey.setTravelAgency(travelAgency);
+
+        // Assert
+        assertEquals(id, journey.getId());
+        assertEquals(country, journey.getCountry());
+        assertEquals(town, journey.getTown());
+        assertEquals(dateToJourney, journey.getDateToJourney());
+        assertEquals(dateFromJourney, journey.getDateFromJourney());
+        assertEquals(travelAgency, journey.getTravelAgency());
+    }
+
+
+
 }
 
 
