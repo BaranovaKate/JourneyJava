@@ -1,10 +1,7 @@
 package by.baranova.journeyjava.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.persistence.Column;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Field;
@@ -463,6 +460,12 @@ class JourneyTest {
         assertNotEquals(journey1, journey2);
         assertNotEquals(journey1.hashCode(), journey2.hashCode());
     }
+
+    @Test
+    void testEntityAnnotation() {
+        assertTrue(Journey.class.isAnnotationPresent(Entity.class));
+    }
+
 
     @Test
     void testEqualsAndHashCodeWithDifferentInstances() {
