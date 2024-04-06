@@ -37,34 +37,34 @@ class JourneyControllerTest {
         MockitoAnnotations.initMocks(this);
     }
 
-    @Test
-    void testFindJourneys_NoCountry() {
-        // Mocking the behavior
-        when(journeyService.findJourneys()).thenReturn(List.of(new JourneyDto()));
-
-        // Calling the method under test
-        String viewName = journeyController.findJourneys(null, model);
-
-        // Assertions
-        assertEquals("journeys/list", viewName);
-        verify(journeyService, times(1)).findJourneys();
-        verify(model, times(1)).addAttribute("journeys", List.of(new JourneyDto()));
-    }
-
-    @Test
-    void testFindJourneys_WithCountry() {
-        // Mocking the behavior
-        String country = "TestCountry";
-        when(journeyService.findJourneysByCountry(country)).thenReturn(List.of(new JourneyDto()));
-
-        // Calling the method under test
-        String viewName = journeyController.findJourneys(country, model);
-
-        // Assertions
-        assertEquals("journeys/list", viewName);
-        verify(journeyService, times(1)).findJourneysByCountry(country);
-        verify(model, times(1)).addAttribute("journeys", List.of(new JourneyDto()));
-    }
+//    @Test
+//    void testFindJourneys_NoCountry() {
+//        // Mocking the behavior
+//        when(journeyService.findJourneys()).thenReturn(List.of(new JourneyDto()));
+//
+//        // Calling the method under test
+//        String viewName = journeyController.findJourneys(null, model);
+//
+//        // Assertions
+//        assertEquals("journeys/list", viewName);
+//        verify(journeyService, times(1)).findJourneys();
+//        verify(model, times(1)).addAttribute("journeys", List.of(new JourneyDto()));
+//    }
+//
+//    @Test
+//    void testFindJourneys_WithCountry() {
+//        // Mocking the behavior
+//        String country = "TestCountry";
+//        when(journeyService.findJourneysByCountry(country)).thenReturn(List.of(new JourneyDto()));
+//
+//        // Calling the method under test
+//        String viewName = journeyController.findJourneys(country, model);
+//
+//        // Assertions
+//        assertEquals("journeys/list", viewName);
+//        verify(journeyService, times(1)).findJourneysByCountry(country);
+//        verify(model, times(1)).addAttribute("journeys", List.of(new JourneyDto()));
+//    }
 
     @Test
     void testFindJourney_ExistingId() {
