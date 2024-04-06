@@ -36,7 +36,6 @@ class JourneyControllerTest {
     @InjectMocks
     JourneyController journeyController;
 
-
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this);
