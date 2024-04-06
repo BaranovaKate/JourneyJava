@@ -3,7 +3,6 @@ package by.baranova.journeyjava.dto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.Data;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -12,7 +11,6 @@ import java.time.LocalDate;
  * Used for transferring journey data between layers of the application.
  */
 
-//@Data
 public class JourneyDto implements Serializable {
 
     /** Constant. */
