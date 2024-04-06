@@ -12,7 +12,7 @@ import java.time.LocalDate;
  * Used for transferring journey data between layers of the application.
  */
 
-//@Data
+@Data
 public class JourneyDto implements Serializable {
 
     /** Constant. */
@@ -42,66 +42,4 @@ public class JourneyDto implements Serializable {
     /** The DTO representing the travel agency associated with the journey. */
     private TravelAgencyDto travelAgency;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getTown() {
-        return town;
-    }
-
-    public void setTown(String town) {
-        this.town = town;
-    }
-
-    public LocalDate getDateToJourney() {
-        return dateToJourney;
-    }
-
-    public void setDateToJourney(LocalDate dateToJourney) {
-        this.dateToJourney = dateToJourney;
-    }
-
-    public LocalDate getDateFromJourney() {
-        return dateFromJourney;
-    }
-
-    public void setDateFromJourney(LocalDate dateFromJourney) {
-        this.dateFromJourney = dateFromJourney;
-    }
-
-    public TravelAgencyDto getTravelAgency() {
-        return travelAgency;
-    }
-
-    public void setTravelAgency(TravelAgencyDto travelAgency) {
-        this.travelAgency = travelAgency;
-    }
-
-    public JourneyDto() {
-    }
-
-    @Override
-    public String toString() {
-        return "JourneyDto{" +
-                "id=" + id +
-                ", country='" + country + '\'' +
-                ", town='" + town + '\'' +
-                ", dateToJourney=" + dateToJourney +
-                ", dateFromJourney=" + dateFromJourney +
-                ", travelAgency=" + travelAgency +
-                '}';
-    }
 }
