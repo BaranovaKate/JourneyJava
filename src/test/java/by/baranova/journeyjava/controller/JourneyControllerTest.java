@@ -3,6 +3,7 @@ import by.baranova.journeyjava.dto.JourneyDto;
 import by.baranova.journeyjava.service.CounterService;
 import by.baranova.journeyjava.service.JourneyService;
 import jakarta.persistence.EntityNotFoundException;
+import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -25,6 +26,9 @@ class JourneyControllerTest {
 
     @Mock
     CounterService counterService;
+
+    @Mock
+    private Logger logger; // Мок для логгера
 
     @Mock
     Model model;
