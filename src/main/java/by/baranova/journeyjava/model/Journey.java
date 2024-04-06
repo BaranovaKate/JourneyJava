@@ -10,7 +10,7 @@ import java.time.LocalDate;
  * Entity class representing a journey.
  */
 
-@Data
+//@Data
 @Entity
 @Table(name = "journeys")
 public class Journey {
@@ -45,4 +45,67 @@ public class Journey {
     @JsonIgnoreProperties("journeys")
     private TravelAgency travelAgency;
 
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getTown() {
+        return town;
+    }
+
+    public void setTown(String town) {
+        this.town = town;
+    }
+
+    public LocalDate getDateToJourney() {
+        return dateToJourney;
+    }
+
+    public void setDateToJourney(LocalDate dateToJourney) {
+        this.dateToJourney = dateToJourney;
+    }
+
+    public LocalDate getDateFromJourney() {
+        return dateFromJourney;
+    }
+
+    public void setDateFromJourney(LocalDate dateFromJourney) {
+        this.dateFromJourney = dateFromJourney;
+    }
+
+    public TravelAgency getTravelAgency() {
+        return travelAgency;
+    }
+
+    public void setTravelAgency(TravelAgency travelAgency) {
+        this.travelAgency = travelAgency;
+    }
+
+    @Override
+    public String toString() {
+        return "Journey{" +
+                "id=" + id +
+                ", country='" + country + '\'' +
+                ", town='" + town + '\'' +
+                ", dateToJourney=" + dateToJourney +
+                ", dateFromJourney=" + dateFromJourney +
+                ", travelAgency=" + travelAgency +
+                '}';
+    }
+
+    public Journey() {
+    }
 }
