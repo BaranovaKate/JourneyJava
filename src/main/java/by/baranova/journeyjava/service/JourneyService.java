@@ -19,7 +19,7 @@ public class JourneyService {
 
     private final JourneyRepository journeyRepository;
 
-    private final Cache cache;
+    private final Cache<String, Object> cache;
 
     static final Logger LOGGER = LogManager.getLogger(JourneyService.class);
 

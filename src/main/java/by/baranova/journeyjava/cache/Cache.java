@@ -7,16 +7,28 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Component
-@Data
-public class Cache {
+//@Data
+public class Cache<K, V> {
 
-    private Map<String, Object> hashMap = new ConcurrentHashMap<>();
+    private final Map<K, V> hashMap = new ConcurrentHashMap<>();
 
-    public void put(final String key, final Object value) {
-        hashMap.put(key, value);
+
+//    private Map<String, Object> hashMap = new ConcurrentHashMap<>();
+
+    private static final int MAX_SIZE = 100;
+
+    public void put(final K key, final V value) {
+        if (hashMap.containsKey(key)) {
+            hashMap.put(key, value);
+        } else {
+            hashMap.put(key, value);
+            if (hashMap.size() >= MAX_SIZE) {
+                hashMap.clear();
+            }
+        }
     }
 
-    public Object get(final String key) {
+    public Object get(final K key) {
         return hashMap.get(key);
     }
 

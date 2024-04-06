@@ -15,127 +15,163 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CacheTest {
 
-    private Cache cache;
+    private Cache<String, Object> cache;
 
     @BeforeEach
     void setUp() {
-        cache = new Cache();
+        cache = new Cache<>();
     }
 
     @Test
     void putAndGet() {
-        // Arrange
-        Cache cache = new Cache();
-
-        // Act
-        cache.put("testKey", "testValue");
-        Object retrievedValue = cache.get("testKey");
-
-        // Assert
-        assertEquals("testValue", retrievedValue);
+        cache.put("key1", "value1");
+        assertEquals("value1", cache.get("key1"));
     }
 
     @Test
+    void putTwiceAndGet() {
+        cache.put("key1", "value1");
+        cache.put("key1", "value2");
+        assertEquals("value2", cache.get("key1"));
+    }
+    @Test
     void clear() {
-        // Arrange
-        Cache cache = new Cache();
         cache.put("testKey", "testValue");
-
-        // Act
         cache.clear();
-
-        // Assert
         assertNull(cache.get("testKey"));
     }
 
-    @Test
-    void equalsAndHashCode() {
-        // Arrange
-        Cache cache1 = new Cache();
-        Cache cache2 = new Cache();
-
-        // Act & Assert
-        assertEquals(cache1, cache2);
-        assertEquals(cache1.hashCode(), cache2.hashCode());
-
-        // Arrange
-        cache1.put("testKey", "testValue");
-
-        // Act & Assert
-        assertNotEquals(cache1, cache2);
-        assertNotEquals(cache1.hashCode(), cache2.hashCode());
-    }
 
     @Test
-    void testToString() {
-        // Arrange
-        Cache cache = new Cache();
-        cache.put("testKey", "testValue");
-
-        // Act
-        String cacheString = cache.toString();
-
-        // Assert
-        assertTrue(cacheString.contains("testKey"));
-        assertTrue(cacheString.contains("testValue"));
+    void clearWhenSizeExceeds() {
+        for (int i = 0; i < 110; i++) {
+            cache.put("key" + i, "value" + i);
+        }
+        assertNull(cache.get("key0")); // The oldest entry should have been removed
+        assertNotNull(cache.get("key100")); // The latest entry should still exist
     }
 
-    @Test
-    void getHashMap() {
-        // Arrange
-        Cache cache = new Cache();
-        Map<String, Object> expectedHashMap = new HashMap<>();
-        expectedHashMap.put("testKey", "testValue");
-        cache.setHashMap(expectedHashMap);
-
-        // Act
-        Map<String, Object> actualHashMap = cache.getHashMap();
-
-        // Assert
-        assertEquals(expectedHashMap, actualHashMap);
-    }
-
-    @Test
-    void setHashMap() {
-        // Arrange
-        Cache cache = new Cache();
-        Map<String, Object> expectedHashMap = new HashMap<>();
-        expectedHashMap.put("testKey", "testValue");
-
-        // Act
-        cache.setHashMap(expectedHashMap);
-
-        // Assert
-        assertEquals(expectedHashMap, cache.getHashMap());
-    }
-
-    @Test
-    void canEqual() {
-        // Arrange
-        Cache cache1 = new Cache();
-        Cache cache2 = new Cache();
-
-        // Act & Assert
-        assertTrue(cache1.canEqual(cache2));
-    }
-
-
-    @Test
-    void testEquals() {
-        // Arrange
-        Cache anotherCache = new Cache();
-
-        // Act & Assert
-        assertEquals(cache, anotherCache);
-    }
-    @Test
-    void testHashCode() {
-        // Arrange
-        Cache anotherCache = new Cache();
-
-        // Act & Assert
-        assertEquals(cache.hashCode(), anotherCache.hashCode());
-    }
+//    private Cache cache;
+//
+//    @BeforeEach
+//    void setUp() {
+//        cache = new Cache();
+//    }
+//
+//    @Test
+//    void putAndGet() {
+//        // Arrange
+//        Cache cache = new Cache();
+//
+//        // Act
+//        cache.put("testKey", "testValue");
+//        Object retrievedValue = cache.get("testKey");
+//
+//        // Assert
+//        assertEquals("testValue", retrievedValue);
+//    }
+//
+//    @Test
+//    void clear() {
+//        // Arrange
+//        Cache cache = new Cache();
+//        cache.put("testKey", "testValue");
+//
+//        // Act
+//        cache.clear();
+//
+//        // Assert
+//        assertNull(cache.get("testKey"));
+//    }
+//
+//    @Test
+//    void equalsAndHashCode() {
+//        // Arrange
+//        Cache cache1 = new Cache();
+//        Cache cache2 = new Cache();
+//
+//        // Act & Assert
+//        assertEquals(cache1, cache2);
+//        assertEquals(cache1.hashCode(), cache2.hashCode());
+//
+//        // Arrange
+//        cache1.put("testKey", "testValue");
+//
+//        // Act & Assert
+//        assertNotEquals(cache1, cache2);
+//        assertNotEquals(cache1.hashCode(), cache2.hashCode());
+//    }
+//
+//    @Test
+//    void testToString() {
+//        // Arrange
+//        Cache cache = new Cache();
+//        cache.put("testKey", "testValue");
+//
+//        // Act
+//        String cacheString = cache.toString();
+//
+//        // Assert
+//        assertTrue(cacheString.contains("testKey"));
+//        assertTrue(cacheString.contains("testValue"));
+//    }
+//
+//    @Test
+//    void getHashMap() {
+//        // Arrange
+//        Cache cache = new Cache();
+//        Map<String, Object> expectedHashMap = new HashMap<>();
+//        expectedHashMap.put("testKey", "testValue");
+//        cache.setHashMap(expectedHashMap);
+//
+//        // Act
+//        Map<String, Object> actualHashMap = cache.getHashMap();
+//
+//        // Assert
+//        assertEquals(expectedHashMap, actualHashMap);
+//    }
+//
+//    @Test
+//    void setHashMap() {
+//        // Arrange
+//        Cache cache = new Cache();
+//        Map<String, Object> expectedHashMap = new HashMap<>();
+//        expectedHashMap.put("testKey", "testValue");
+//
+//        // Act
+//        cache.setHashMap(expectedHashMap);
+//
+//        // Assert
+//        assertEquals(expectedHashMap, cache.getHashMap());
+//    }
+//
+//    @Test
+//    void canEqual() {
+//        // Arrange
+//        Cache cache1 = new Cache();
+//        Cache cache2 = new Cache();
+//
+//        // Act & Assert
+//        assertTrue(cache1.canEqual(cache2));
+//    }
+//
+//
+//    @Test
+//    void testEquals() {
+//        // Arrange
+//        Cache anotherCache = new Cache();
+//
+//        // Act & Assert
+//        assertEquals(cache, anotherCache);
+//    }
+//    @Test
+//    void testHashCode() {
+//        // Arrange
+//        Cache anotherCache = new Cache();
+//
+//        // Act & Assert
+//        assertEquals(cache.hashCode(), anotherCache.hashCode());
+//    }
 
 }
 //
