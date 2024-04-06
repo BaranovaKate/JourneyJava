@@ -10,8 +10,6 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
-
 class TravelAgencyDtoTest {
     private final ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
     private final Validator validator = factory.getValidator();

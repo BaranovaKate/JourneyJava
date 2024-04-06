@@ -19,16 +19,12 @@ import java.util.Optional;
 @Repository
 public class JourneyRepository {
 
-    /** The Hibernate SessionFactory for database interactions. */
     private final SessionFactory sessionFactory;
 
-    /** The mapper to convert between Journey and JourneyDto. */
     private final JourneyMapper journeyMapper;
 
-    /** Constant for the country field. */
     private static final String CONST_COUNTRY = "country";
 
-    /** Constant for the UPDATE query. */
     private static final String CONST_UPDATE = """
             UPDATE Journey J SET
                J.country = :country,
@@ -38,12 +34,6 @@ public class JourneyRepository {
                J.travelAgency.id = :travel_agency_id
             WHERE J.id = :id""";
 
-    /**
-     * Retrieves a list of all journeys along
-     * with their associated travel agencies.
-     *
-     * @return A list of JourneyDto representing all journeys.
-     */
     public List<JourneyDto> findAll() {
         final List<Journey> journeys = sessionFactory.fromSession(session -> {
             Query<Journey> query = session.createQuery(

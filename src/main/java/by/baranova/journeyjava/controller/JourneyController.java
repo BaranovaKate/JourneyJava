@@ -43,44 +43,23 @@ public class JourneyController {
             description = "Выводит список всех путешествий. "
                     + "Так же выполняет поиск по стране"
     )
-    public String findJourneys(Model model) {
+    public String findJourneys(final @RequestParam(
+            name = "country", required = false) String country, Model model) {
         List<JourneyDto> journeys;
+        if (country != null) {
+            LOGGER.info("Display Journeys by country");
+            journeys = journeyService.findJourneysByCountry(country);
+        } else {
+            CounterService.incrementRequestCount();
+            int requestCount = CounterService.getRequestCount();
+            LOGGER.info("Текущее количество запросов: {}", requestCount);
 
-        CounterService.incrementRequestCount();
-        int requestCount = CounterService.getRequestCount();
-        LOGGER.info("Текущее количество запросов: {}", requestCount);
-
-        LOGGER.info("Display all Journeys");
-        journeys = journeyService.findJourneys();
-
+            LOGGER.info("Display all Journeys");
+            journeys = journeyService.findJourneys();
+        }
         model.addAttribute("journeys", journeys);
         return "journeys/list";
     }
-
-//    @GetMapping
-//    @Operation(
-//            method = "GET",
-//            summary = "Получить список всех путешествий",
-//            description = "Выводит список всех путешествий. "
-//                    + "Так же выполняет поиск по стране"
-//    )
-//    public String findJourneys(final @RequestParam(
-//            name = "country", required = false) String country, Model model) {
-//        List<JourneyDto> journeys;
-//        if (country != null) {
-//            LOGGER.info("Display Journeys by country");
-//            journeys = journeyService.findJourneysByCountry(country);
-//        } else {
-//            CounterService.incrementRequestCount();
-//            int requestCount = CounterService.getRequestCount();
-//            LOGGER.info("Текущее количество запросов: {}", requestCount);
-//
-//            LOGGER.info("Display all Journeys");
-//            journeys = journeyService.findJourneys();
-//        }
-//        model.addAttribute("journeys", journeys);
-//        return "journeys/list";
-//    }
 
     @GetMapping("/{id}")
     @Operation(

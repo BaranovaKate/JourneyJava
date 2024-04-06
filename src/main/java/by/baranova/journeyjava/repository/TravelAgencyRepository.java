@@ -11,11 +11,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-/**
- * The TravelAgencyRepository class is responsible
- * for managing operations related to travel
- * agencies in the database.
- */
 @AllArgsConstructor
 @Repository
 public class TravelAgencyRepository {
