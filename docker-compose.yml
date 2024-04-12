@@ -1,28 +1,33 @@
-version: '3.8'
-
-volumes:
-  pg_journey:
+version: '3.9'
 
 services:
   journey_db:
     image: postgres
+    container_name: journey_db
     restart: always
     environment:
-      - POSTGRES_USER = postgres
-      - POSTGRES_PASSWORD = 19072004m
-      - POSTGRES_DB = journeys
-    volumes:
-      - pg_journey:/var/lib/postgresql/data
-
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 19072004m
+      POSTGRES_DB: journeys
     ports:
-      - "127.0.0.1:5433:5432"
+      - '5432:5432'
+    networks:
+      - journey-network
+
   app:
-    restart: always
-    build: .
+    image: journeyjava
     ports:
       - "8080:8080"
+    environment:
+      DB_USER: postgres
+      DB_PASSWORD: 19072004m
+      DB_NAME: journeys
+      DB_HOST: journey_db:5432
     depends_on:
       - journey_db
-    environment:
-      SPRING_DATASOURCE_URL: 'jdbc:postgresql://journey_db:5432/journeys'
-      JAVA_OPTS: '-Xmx512'
+    networks:
+      - journey-network
+
+networks:
+  journey-network:
+    driver: bridge

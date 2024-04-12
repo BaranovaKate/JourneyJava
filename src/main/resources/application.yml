@@ -1,0 +1,17 @@
+app:
+  hibernate:
+    url: jdbc:postgresql://journey_db:5432/${DB_NAME}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+spring:
+  mvc:
+    hidden-method:
+      filter:
+        enabled: true
