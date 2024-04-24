@@ -6,7 +6,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.2.3</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
     <groupId>by.baranova</groupId>
     <artifactId>JourneyJava</artifactId>
@@ -14,13 +14,10 @@
     <name>JourneyJava</name>
     <description>JourneyJava</description>
 
-
     <properties>
         <java.version>21</java.version>
         <sonar.organization>baranovakate</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-
-<!--        <hibernate.version>6.4.4.Final</hibernate.version>-->
         <postgresql.version>42.7.1</postgresql.version>
 
     </properties>

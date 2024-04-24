@@ -100,6 +100,8 @@ public class Journey {
                 '}';
     }
 
+
+    /** empty constructor. */
     public Journey() {
     }
 

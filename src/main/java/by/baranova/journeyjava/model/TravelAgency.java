@@ -56,6 +56,7 @@ public class TravelAgency {
                 '}';
     }
 
+    /** empty constructor. */
     public TravelAgency() {
     }
 }
