@@ -37,31 +37,25 @@ class TravelAgencyDtoTest {
     }
     @Test
     void testGettersAndSetters() {
-        // Arrange
         TravelAgencyDto travelAgencyDto = new TravelAgencyDto();
         Long id = 1L;
         String name = "Agency";
 
-        // Act
         travelAgencyDto.setId(id);
         travelAgencyDto.setName(name);
 
-        // Assert
         assertEquals(id, travelAgencyDto.getId());
         assertEquals(name, travelAgencyDto.getName());
     }
 
     @Test
     void testToString() {
-        // Arrange
         TravelAgencyDto travelAgencyDto = new TravelAgencyDto();
         travelAgencyDto.setId(1L);
         travelAgencyDto.setName("Agency");
 
-        // Act
         String travelAgencyDtoString = travelAgencyDto.toString();
 
-        // Assert
         assertTrue(travelAgencyDtoString.contains("id=1"));
         assertTrue(travelAgencyDtoString.contains("name=Agency"));
     }
@@ -81,7 +75,6 @@ class TravelAgencyDtoTest {
         travelAgencyDto3.setId(2L);
         travelAgencyDto3.setName("Agency");
 
-        // Assert
         assertEquals(travelAgencyDto1, travelAgencyDto2);
         assertNotEquals(travelAgencyDto1, travelAgencyDto3);
         assertEquals(travelAgencyDto1.hashCode(), travelAgencyDto2.hashCode());
@@ -90,65 +83,40 @@ class TravelAgencyDtoTest {
 
     @Test
     void getId() {
-        // Arrange
         Long id = 1L;
         TravelAgencyDto travelAgencyDto = new TravelAgencyDto();
         travelAgencyDto.setId(id);
 
-        // Act & Assert
         assertEquals(id, travelAgencyDto.getId());
     }
 
     @Test
     void getName() {
-        // Arrange
         String name = "TestName";
         TravelAgencyDto travelAgencyDto = new TravelAgencyDto();
         travelAgencyDto.setName(name);
 
-        // Act & Assert
         assertEquals(name, travelAgencyDto.getName());
     }
 
     @Test
     void setId() {
-        // Arrange
         Long id = 1L;
         TravelAgencyDto travelAgencyDto = new TravelAgencyDto();
 
-        // Act
         travelAgencyDto.setId(id);
 
-        // Assert
         assertEquals(id, travelAgencyDto.getId());
     }
 
     @Test
     void setName() {
-        // Arrange
         String name = "TestName";
         TravelAgencyDto travelAgencyDto = new TravelAgencyDto();
 
-        // Act
         travelAgencyDto.setName(name);
 
-        // Assert
         assertEquals(name, travelAgencyDto.getName());
-    }
-
-    @Test
-    void testEquals() {
-        // Arrange
-        TravelAgencyDto travelAgencyDto1 = new TravelAgencyDto();
-        travelAgencyDto1.setId(1L);
-        travelAgencyDto1.setName("TestName");
-
-        TravelAgencyDto travelAgencyDto2 = new TravelAgencyDto();
-        travelAgencyDto2.setId(1L);
-        travelAgencyDto2.setName("TestName");
-
-        // Act & Assert
-        assertTrue(travelAgencyDto1.equals(travelAgencyDto2));
     }
 
     @Test
@@ -168,7 +136,6 @@ class TravelAgencyDtoTest {
 
     @Test
     void testHashCode() {
-        // Arrange
         TravelAgencyDto travelAgencyDto1 = new TravelAgencyDto();
         travelAgencyDto1.setId(1L);
         travelAgencyDto1.setName("TestName");
@@ -177,9 +144,6 @@ class TravelAgencyDtoTest {
         travelAgencyDto2.setId(1L);
         travelAgencyDto2.setName("TestName");
 
-        // Act & Assert
         assertEquals(travelAgencyDto1.hashCode(), travelAgencyDto2.hashCode());
     }
-
-
 }

@@ -2,11 +2,9 @@ package by.baranova.journeyjava.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.Data;
 
 import java.util.List;
 
-//@Data
 @Entity
 @Table(name = "travel_agencies")
 public class TravelAgency {

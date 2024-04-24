@@ -2,15 +2,9 @@ package by.baranova.journeyjava.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.Data;
 
 import java.time.LocalDate;
 
-/**
- * Entity class representing a journey.
- */
-
-//@Data
 @Entity
 @Table(name = "journeys")
 public class Journey {

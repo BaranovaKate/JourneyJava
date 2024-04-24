@@ -18,12 +18,6 @@ public class JourneyMapper {
      */
     private final TravelAgencyRepository travelAgencyRepository;
 
-    /**
-     * Converts a Journey entity to a JourneyDto data transfer object.
-     *
-     * @param journey The Journey entity to be converted.
-     * @return The corresponding JourneyDto.
-     */
     public JourneyDto toDto(final Journey journey) {
         final JourneyDto dto = new JourneyDto();
         dto.setId(journey.getId());
@@ -36,12 +30,6 @@ public class JourneyMapper {
         return dto;
     }
 
-    /**
-     * Converts a JourneyDto data transfer object to a Journey entity.
-     *
-     * @param dto The JourneyDto to be converted.
-     * @return The corresponding Journey entity.
-     */
     public Journey toEntity(final JourneyDto dto) {
         final Journey entity = new Journey();
         entity.setId(dto.getId());
