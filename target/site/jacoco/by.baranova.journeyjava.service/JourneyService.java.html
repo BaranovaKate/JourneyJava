@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JourneyService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JourneyJava</a> &gt; <a href="index.source.html" class="el_package">by.baranova.journeyjava.service</a> &gt; <span class="el_source">JourneyService.java</span></div><h1>JourneyService.java</h1><pre class="source lang-java linenums">package by.baranova.journeyjava.service;
+
+import by.baranova.journeyjava.cache.Cache;
+import by.baranova.journeyjava.dto.JourneyDto;
+import by.baranova.journeyjava.dto.TravelAgencyDto;
+import by.baranova.journeyjava.repository.JourneyRepository;
+import jakarta.persistence.EntityNotFoundException;
+import lombok.AllArgsConstructor;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Objects;
+
+<span class="fc" id="L16">@AllArgsConstructor</span>
+@Service
+public class JourneyService {
+
+    private final JourneyRepository journeyRepository;
+
+    private final Cache&lt;String, Object&gt; cache;
+
+<span class="fc" id="L24">    static final Logger LOGGER = LogManager.getLogger(JourneyService.class);</span>
+
+    public JourneyDto findJourneyById(final Long id) {
+<span class="fc" id="L27">        JourneyDto journey = (JourneyDto) cache.get(&quot;journey_&quot; + id);</span>
+<span class="pc bpc" id="L28" title="1 of 2 branches missed.">        if (journey == null) {</span>
+<span class="fc" id="L29">            journey = journeyRepository.findById(id)</span>
+<span class="fc" id="L30">                    .orElseThrow(() -&gt; new EntityNotFoundException(</span>
+                            &quot;Journey with ID &quot; + id + &quot; not found&quot;));
+<span class="fc" id="L32">            cache.put(&quot;journey_&quot; + id, journey);</span>
+        } else {
+<span class="nc" id="L34">            LOGGER.info(&quot;Display Journey from cache&quot;);</span>
+        }
+<span class="fc" id="L36">        return journey;</span>
+    }
+
+    public void deleteById(final Long id) {
+<span class="fc" id="L40">        journeyRepository.deleteById(id);</span>
+<span class="fc" id="L41">        cache.clear();</span>
+<span class="fc" id="L42">    }</span>
+
+    public List&lt;JourneyDto&gt; findJourneys() {
+<span class="fc" id="L45">        List&lt;JourneyDto&gt; journeys = (List&lt;JourneyDto&gt;) cache.get(&quot;journeys&quot;);</span>
+<span class="fc bfc" id="L46" title="All 2 branches covered.">        if (journeys == null) {</span>
+<span class="fc" id="L47">            journeys = journeyRepository.findAll();</span>
+<span class="fc" id="L48">            cache.put(&quot;journeys&quot;, journeys);</span>
+        } else {
+<span class="fc" id="L50">            LOGGER.info(&quot;Display Journeys from cache&quot;);</span>
+        }
+<span class="fc" id="L52">        return journeys;</span>
+    }
+
+    public List&lt;JourneyDto&gt; findJourneysByCountry(final String country) {
+<span class="fc" id="L56">        List&lt;JourneyDto&gt; journeys = (List&lt;JourneyDto&gt;) cache</span>
+<span class="fc" id="L57">                .get(&quot;journeys_&quot; + country);</span>
+<span class="fc bfc" id="L58" title="All 2 branches covered.">        if (journeys == null) {</span>
+<span class="fc" id="L59">            journeys = journeyRepository.findByCountry(country);</span>
+<span class="fc" id="L60">            cache.put(&quot;journeys_&quot; + country, journeys);</span>
+        } else {
+<span class="fc" id="L62">            LOGGER.info(&quot;Display Journeys from cache&quot;);</span>
+        }
+<span class="fc" id="L64">        return journeys;</span>
+    }
+
+    public void createJourneysBulk(List&lt;JourneyDto&gt; journeyDtos, String agency) {
+<span class="pc bpc" id="L68" title="1 of 4 branches missed.">        if (journeyDtos == null || journeyDtos.isEmpty()) {</span>
+<span class="fc" id="L69">            throw new IllegalArgumentException(&quot;No journeys provided&quot;);</span>
+        }
+<span class="fc" id="L71">        boolean agencyNameConflict = journeyDtos.stream()</span>
+<span class="fc" id="L72">                .anyMatch(journeyDto -&gt; {</span>
+<span class="fc" id="L73">                    TravelAgencyDto travelAgency = journeyDto.getTravelAgency();</span>
+<span class="pc bpc" id="L74" title="1 of 4 branches missed.">                    return travelAgency == null || !travelAgency.getName().equals(agency);</span>
+                });
+<span class="fc bfc" id="L76" title="All 2 branches covered.">        if (agencyNameConflict) {</span>
+<span class="fc" id="L77">            throw new IllegalArgumentException(&quot;Agency name in URL does not&quot; +</span>
+                    &quot; match agency name in provided journey data&quot;);
+        }
+<span class="fc" id="L80">        List&lt;String&gt; errors = journeyDtos.stream()</span>
+<span class="fc" id="L81">                .map(journeyDto -&gt; {</span>
+                    try {
+<span class="fc" id="L83">                        journeyRepository.save(journeyDto);</span>
+<span class="fc" id="L84">                        return null;</span>
+<span class="nc" id="L85">                    } catch (Exception e) {</span>
+<span class="nc" id="L86">                        return &quot;Error creating journey: &quot; + e.getMessage();</span>
+                    }
+                })
+<span class="fc" id="L89">                .filter(Objects::nonNull)</span>
+<span class="fc" id="L90">                .toList();</span>
+
+<span class="pc bpc" id="L92" title="1 of 2 branches missed.">        if (!errors.isEmpty()) {</span>
+<span class="nc" id="L93">            throw new IllegalArgumentException(&quot;Errors occurred during bulk creation:\n&quot;</span>
+<span class="nc" id="L94">                    + String.join(&quot;\n&quot;, errors));</span>
+        }
+<span class="fc" id="L96">    }</span>
+
+
+
+    public void save(final JourneyDto journeyDto) {
+<span class="nc" id="L101">        journeyRepository.save(journeyDto);</span>
+<span class="nc" id="L102">        cache.clear();</span>
+<span class="nc" id="L103">    }</span>
+
+    public void update(final Long id, final JourneyDto journey) {
+<span class="fc" id="L106">        journeyRepository.update(id, journey);</span>
+<span class="fc" id="L107">        cache.clear();</span>
+<span class="fc" id="L108">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

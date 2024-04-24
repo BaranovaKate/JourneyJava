@@ -1,0 +1,12 @@
+by\baranova\journeyjava\config\SwaggerConfigTest.class
+by\baranova\journeyjava\JourneyJavaApplicationTests.class
+by\baranova\journeyjava\model\TravelAgencyTest.class
+by\baranova\journeyjava\service\AgencyServiceTest.class
+by\baranova\journeyjava\mapper\TravelAgencyMapperTest.class
+by\baranova\journeyjava\service\JourneyServiceTest.class
+by\baranova\journeyjava\dto\TravelAgencyDtoTest.class
+by\baranova\journeyjava\exception\GlobalExceptionHandlerTest.class
+by\baranova\journeyjava\service\CounterServiceTest.class
+by\baranova\journeyjava\mapper\JourneyMapperTest.class
+by\baranova\journeyjava\model\JourneyTest.class
+by\baranova\journeyjava\cache\CacheTest.class

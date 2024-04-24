@@ -1,8 +1,12 @@
 app:
   hibernate:
-    url: jdbc:postgresql://${DB_HOST}/${DB_NAME}
-    username: ${DB_USER}
-    password: ${DB_PASSWORD}
+    url: jdbc:postgresql://dpg-cokidkud3nmc739ch98g-a.oregon-postgres.render.com/journeys_j57g
+    username: katerina
+    password: RT7lxqahAxjanpeyFF3tYi9wkafHW37K
+    name: journeys_j57g  # Имя базы данных
+#    url: jdbc:postgresql://${DB_HOST}/${DB_NAME}
+#    username: ${DB_USER}
+#    password: ${DB_PASSWORD}
 
 management:
   endpoints:
@@ -16,4 +20,3 @@ spring:
       filter:
         enabled: true
 
-#        journey_db:5432

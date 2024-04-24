@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: by.baranova.journeyjava.dto.TravelAgencyDtoTest
+-------------------------------------------------------------------------------
+Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.250 s -- in by.baranova.journeyjava.dto.TravelAgencyDtoTest

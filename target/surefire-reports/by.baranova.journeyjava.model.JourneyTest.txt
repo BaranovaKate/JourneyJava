@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: by.baranova.journeyjava.model.JourneyTest
+-------------------------------------------------------------------------------
+Tests run: 22, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.114 s -- in by.baranova.journeyjava.model.JourneyTest

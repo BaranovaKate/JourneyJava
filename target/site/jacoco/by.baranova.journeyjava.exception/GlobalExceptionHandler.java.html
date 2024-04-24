@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GlobalExceptionHandler.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JourneyJava</a> &gt; <a href="index.source.html" class="el_package">by.baranova.journeyjava.exception</a> &gt; <span class="el_source">GlobalExceptionHandler.java</span></div><h1>GlobalExceptionHandler.java</h1><pre class="source lang-java linenums">package by.baranova.journeyjava.exception;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.context.request.WebRequest;
+
+import java.util.List;
+
+/**
+ * Global exception handler class to handle exceptions thrown by controllers.
+ */
+@ControllerAdvice
+<span class="fc" id="L21">public class GlobalExceptionHandler {</span>
+
+    /** Logger for logging error messages. */
+<span class="fc" id="L24">    static final Logger LOGGER = LogManager</span>
+<span class="fc" id="L25">            .getLogger(GlobalExceptionHandler.class);</span>
+
+
+    /**
+     * Handles HTTP client error exceptions.
+     *
+     * @param ex the thrown HTTP client error exception
+     * @param request the web request
+     * @return a response entity with a status code and error message
+     */
+    @ExceptionHandler({HttpClientErrorException.class})
+    public ResponseEntity&lt;Object&gt; handleHttpClientErrorException(
+           final HttpClientErrorException ex, final WebRequest request) {
+<span class="fc" id="L38">        LOGGER.error(&quot;400 Bad Request&quot;);</span>
+<span class="fc" id="L39">        return ResponseEntity.status(HttpStatus.BAD_REQUEST)</span>
+<span class="fc" id="L40">                .body(&quot;400 Bad Request&quot;);</span>
+    }
+
+    /**
+     * Exception handler for cases when method arguments fail validation.
+     * Extracts the list of field errors from the provided
+     * exception and constructs an error message.
+     * Logs the error message and returns a response
+     * with status code 400 (Bad Request)
+     * and the constructed error message.
+     *
+     * @param ex the MethodArgumentNotValidException exception
+     *          that occurs when method arguments are invalid
+     * @return a ResponseEntity object with status code
+     * 400 (Bad Request) and the error message
+     */
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity&lt;Object&gt; handleMethodArgumentNotValidException(
+           final MethodArgumentNotValidException ex) {
+<span class="fc" id="L59">        List&lt;FieldError&gt; fieldErrors = ex.getBindingResult().getFieldErrors();</span>
+<span class="fc" id="L60">        StringBuilder errorMessage = new StringBuilder();</span>
+<span class="fc bfc" id="L61" title="All 2 branches covered.">        for (FieldError fieldError : fieldErrors) {</span>
+<span class="fc" id="L62">            errorMessage.append(fieldError.getDefaultMessage()).append(&quot;; &quot;);</span>
+<span class="fc" id="L63">        }</span>
+<span class="fc" id="L64">        LOGGER.error(&quot;400 Bad Request: {}&quot;, errorMessage);</span>
+<span class="fc" id="L65">        return ResponseEntity.status(HttpStatus.BAD_REQUEST)</span>
+<span class="fc" id="L66">                .body(errorMessage.toString());</span>
+    }
+
+    /**
+     * Handles HTTP request method not supported exceptions.
+     *
+     * @param ex the thrown HTTP request method not supported exception
+     * @param request the web request
+     * @return a response entity with a status code and error message
+     */
+    @ExceptionHandler({HttpRequestMethodNotSupportedException.class})
+    public ResponseEntity&lt;Object&gt; handleMethodNotSupportedException(
+            final HttpRequestMethodNotSupportedException ex,
+           final WebRequest request) {
+<span class="fc" id="L80">        LOGGER.error(&quot;405 Method Not Allowed&quot;);</span>
+<span class="fc" id="L81">        return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED)</span>
+<span class="fc" id="L82">                .body(&quot;405 Method Not Allowed&quot;);</span>
+    }
+
+    /**
+     * Handles runtime exceptions.
+     *
+     * @param ex the thrown runtime exception
+     * @param request the web request
+     * @return a response entity with a status code and error message
+     */
+    @ExceptionHandler({RuntimeException.class})
+    public ResponseEntity&lt;Object&gt; handleRuntimeException(
+            final RuntimeException ex, final WebRequest request) {
+<span class="fc" id="L95">        LOGGER.error(&quot;500 Internal Server Error&quot;);</span>
+<span class="fc" id="L96">        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)</span>
+<span class="fc" id="L97">                .body(&quot;500 Internal Server Error&quot;);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

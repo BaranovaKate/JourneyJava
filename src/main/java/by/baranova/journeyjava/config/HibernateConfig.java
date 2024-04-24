@@ -24,6 +24,8 @@ public class HibernateConfig {
         properties.setProperty("hibernate.format_sql", "true");
         properties.setProperty("hibernate.highlight_sql", "true");
         properties.setProperty("hibernate.hbm2ddl.auto", "update");
+        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
+        properties.setProperty("hibernate.connection.driver_class", "org.postgresql.Driver");
 
         return new org.hibernate.cfg.Configuration()
                 .addProperties(properties)

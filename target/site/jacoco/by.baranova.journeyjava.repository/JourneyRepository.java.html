@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JourneyRepository.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JourneyJava</a> &gt; <a href="index.source.html" class="el_package">by.baranova.journeyjava.repository</a> &gt; <span class="el_source">JourneyRepository.java</span></div><h1>JourneyRepository.java</h1><pre class="source lang-java linenums">package by.baranova.journeyjava.repository;
+
+import by.baranova.journeyjava.dto.JourneyDto;
+import by.baranova.journeyjava.mapper.JourneyMapper;
+import by.baranova.journeyjava.model.Journey;
+import jakarta.persistence.EntityNotFoundException;
+import lombok.AllArgsConstructor;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.MutationQuery;
+import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+
+
+<span class="nc" id="L18">@AllArgsConstructor</span>
+@Repository
+public class JourneyRepository {
+
+    private final SessionFactory sessionFactory;
+
+    private final JourneyMapper journeyMapper;
+
+    private static final String CONST_COUNTRY = &quot;country&quot;;
+
+    private static final String CONST_UPDATE = &quot;&quot;&quot;
+            UPDATE Journey J SET
+               J.country = :country,
+               J.town = :town,\s
+               J.dateToJourney = :dateToJourney,
+               J.dateFromJourney = :dateFromJourney,
+               J.travelAgency.id = :travel_agency_id
+            WHERE J.id = :id&quot;&quot;&quot;;
+
+    public List&lt;JourneyDto&gt; findAll() {
+<span class="nc" id="L38">        final List&lt;Journey&gt; journeys = sessionFactory.fromSession(session -&gt; {</span>
+<span class="nc" id="L39">            Query&lt;Journey&gt; query = session.createQuery(</span>
+                    &quot;FROM Journey j JOIN FETCH j.travelAgency &quot;, Journey.class);
+<span class="nc" id="L41">            return query.list();</span>
+        });
+<span class="nc" id="L43">        return journeys.stream()</span>
+<span class="nc" id="L44">                .map(journeyMapper::toDto)</span>
+<span class="nc" id="L45">                .toList();</span>
+    }
+
+    public Optional&lt;JourneyDto&gt; findById(final Long id) {
+<span class="nc" id="L49">        return Optional.ofNullable(sessionFactory.fromSession(session -&gt; {</span>
+<span class="nc" id="L50">            Query&lt;Journey&gt; query = session.createQuery(&quot;&quot;&quot;</span>
+                FROM Journey J JOIN FETCH J.travelAgency\s
+                WHERE J.id = :id&quot;&quot;&quot;, Journey.class);
+<span class="nc" id="L53">            query.setParameter(&quot;id&quot;, id);</span>
+<span class="nc" id="L54">            return query.uniqueResult();</span>
+<span class="nc" id="L55">        })).map(journeyMapper::toDto);</span>
+    }
+
+
+    public void deleteById(final Long id) {
+<span class="nc" id="L60">        Optional&lt;JourneyDto&gt; journeyOptional = findById(id);</span>
+<span class="nc bnc" id="L61" title="All 2 branches missed.">        if (journeyOptional.isEmpty()) {</span>
+<span class="nc" id="L62">            throw new EntityNotFoundException(</span>
+                    &quot;Journey with id &quot; + id + &quot; not found&quot;);
+        }
+<span class="nc" id="L65">        sessionFactory.inTransaction(session -&gt; {</span>
+<span class="nc" id="L66">            final MutationQuery query = session.createMutationQuery(&quot;&quot;&quot;</span>
+                DELETE FROM Journey
+                WHERE id = :id
+                &quot;&quot;&quot;);
+<span class="nc" id="L70">            query.setParameter(&quot;id&quot;, id);</span>
+<span class="nc" id="L71">            query.executeUpdate();</span>
+<span class="nc" id="L72">        });</span>
+<span class="nc" id="L73">    }</span>
+
+    public List&lt;JourneyDto&gt; findByCountry(final String country) {
+<span class="nc" id="L76">        final List&lt;Journey&gt; journeys = sessionFactory.fromSession(session -&gt; {</span>
+<span class="nc" id="L77">            Query&lt;Journey&gt; query = session.createQuery(&quot;&quot;&quot;</span>
+                        FROM Journey J JOIN FETCH J.travelAgency\s
+                        WHERE J.country = :country&quot;&quot;&quot;,
+                    Journey.class);
+<span class="nc" id="L81">            query.setParameter(CONST_COUNTRY, country);</span>
+<span class="nc" id="L82">            return query.list();</span>
+        });
+<span class="nc bnc" id="L84" title="All 2 branches missed.">        if (journeys == null) {</span>
+<span class="nc" id="L85">            return Collections.emptyList();</span>
+        } else {
+<span class="nc" id="L87">            return journeys.stream()</span>
+<span class="nc" id="L88">                    .map(journeyMapper::toDto)</span>
+<span class="nc" id="L89">                    .toList();</span>
+        }
+    }
+
+    public void save(final JourneyDto journeyDto) {
+<span class="nc" id="L94">        final Journey journey = journeyMapper.toEntity(journeyDto);</span>
+<span class="nc" id="L95">        sessionFactory.inTransaction(session -&gt; session.persist(journey));</span>
+<span class="nc" id="L96">    }</span>
+
+    public void update(final Long id, final JourneyDto journey) {
+<span class="nc bnc" id="L99" title="All 2 branches missed.">        if (findById(id).isEmpty()) {</span>
+<span class="nc" id="L100">            throw new EntityNotFoundException(</span>
+                    &quot;Journey with id &quot; + id + &quot; does not exist&quot;);
+        }
+<span class="nc" id="L103">        sessionFactory.inTransaction(session -&gt; {</span>
+<span class="nc" id="L104">            final MutationQuery query =</span>
+<span class="nc" id="L105">                    session.createMutationQuery(CONST_UPDATE);</span>
+
+<span class="nc" id="L107">            query.setParameter(&quot;id&quot;, id);</span>
+<span class="nc" id="L108">            query.setParameter(CONST_COUNTRY, journey.getCountry());</span>
+<span class="nc" id="L109">            query.setParameter(&quot;town&quot;, journey.getTown());</span>
+<span class="nc" id="L110">            query.setParameter(&quot;dateToJourney&quot;, journey.getDateToJourney());</span>
+<span class="nc" id="L111">            query.setParameter(&quot;dateFromJourney&quot;,</span>
+<span class="nc" id="L112">                    journey.getDateFromJourney());</span>
+<span class="nc" id="L113">            query.setParameter(&quot;travel_agency_id&quot;,</span>
+<span class="nc" id="L114">                    journey.getTravelAgency().getId());</span>
+<span class="nc" id="L115">            query.executeUpdate();</span>
+<span class="nc" id="L116">        });</span>
+<span class="nc" id="L117">    }</span>
+
+    public List&lt;Journey&gt; findByTravelAgencyId(final Long travelAgencyId) {
+<span class="nc" id="L120">        return sessionFactory.fromSession(session -&gt; {</span>
+<span class="nc" id="L121">            Query&lt;Journey&gt; query = session.createQuery(</span>
+                    &quot;FROM Journey J WHERE J.travelAgency.id = &quot;
+                            + &quot;:travelAgencyId&quot;, Journey.class);
+<span class="nc" id="L124">            query.setParameter(&quot;travelAgencyId&quot;, travelAgencyId);</span>
+<span class="nc" id="L125">            return query.list();</span>
+        });
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

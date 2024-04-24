@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Путешествия</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <style>
+        .add-button {
+            margin-top: 20px;
+            margin-right: 20px;
+        }
+    </style>
+</head>
+<body class="container-md">
+
+<form th:method="PUT"
+      th:action="@{/journeys/{id}(id=${journey.id})}"
+      th:object="${journey}">
+
+    <div class="mb-3">
+        <label for="country" class="form-label">Введите страну:</label>
+        <input type="text" th:field="*{country}" class="form-control" id="country" placeholder="Страна">
+        <div style="color:red" th:if="${#fields.hasErrors('country')}" th:errors="*{country}">country</div>
+    </div>
+    <div class="mb-3">
+        <label for="town" class="form-label">Введите город:</label>
+        <input type="text" th:field="*{town}" class="form-control" id="town" placeholder="Город">
+        <div style="color:red" th:if="${#fields.hasErrors('town')}" th:errors="*{town}">lastName</div>
+    </div>
+    <div class="mb-3">
+        <label for="dateToJourney" class="form-label">Введите дату выезда:</label>
+        <input th:value="${#strings.toString(journey.dateToJourney)}" type="date"
+               class="form-control" id="dateToJourney" name="dateToJourney"
+               placeholder="Дата выезда">
+        <div style="color:red"
+             th:if="${#fields.hasErrors('dateToJourney')}"
+             th:errors="*{dateToJourney}">dateToJourney</div>
+    </div>
+    <div class="mb-3">
+        <label for="dateFromJourney" class="form-label">Введите дату возвращения:</label>
+        <input th:value="${#strings.toString(journey.dateFromJourney)}" type="date"
+               class="form-control" id="dateFromJourney" name="dateFromJourney"
+               placeholder="Дата возвращения">
+        <div style="color:red"
+             th:if="${#fields.hasErrors('dateFromJourney')}"
+             th:errors="*{dateFromJourney}">dateFromJourney</div>
+    </div>
+    <div class="mb-3">
+        <label for="travelAgencyName" class="form-label">Название туристического агентства:</label>
+        <input type="text" th:field="*{travelAgency.name}" class="form-control" id="travelAgencyName" placeholder="Название туристического агентства">
+        <div style="color:red" th:if="${#fields.hasErrors('travelAgency.name')}" th:errors="*{travelAgency.name}">Ошибка ввода</div>
+    </div>
+
+    <div class="mb-3">
+        <label for="travelAgencyId" class="form-label">id туристического агентства:</label>
+        <input type="text" th:field="*{travelAgency.id}" class="form-control" id="travelAgencyId" placeholder="id туристического агентства">
+        <div style="color:red" th:if="${#fields.hasErrors('travelAgency.id')}" th:errors="*{travelAgency.id}">Ошибка ввода</div>
+    </div>
+    <input class="btn btn-success" type="submit" value="Сохранить"/>
+</form>
+<a class="btn btn-secondary add-button" th:href="@{/journeys}">Вернуться домой</a>
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>
